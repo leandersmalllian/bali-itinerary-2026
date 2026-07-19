@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴厘岛旅行计划 · 2026.10.1–10.7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Noto+Serif+SC:wght@500;700&family=Work+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canopy: #163B34;
+    --canopy-deep: #0E2A25;
+    --sand: #F1E6D0;
+    --sand-light: #F9F2E4;
+    --coral: #E2653F;
+    --gold: #BE9530;
+    --ink: #26241D;
+    --paper: #FBF7EF;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Work Sans", "Noto Sans SC", sans-serif;
+    line-height: 1.6;
+  }
+  h1,h2,h3, .stamp-num{
+    font-family: "Fraunces", "Noto Serif SC", serif;
+  }
+  a { color: inherit; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    background: radial-gradient(ellipse at 20% 20%, #1F4A41 0%, var(--canopy) 45%, var(--canopy-deep) 100%);
+    color: var(--sand-light);
+    padding: 90px 24px 70px;
+    overflow: hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 85% 15%, rgba(190,149,48,0.18) 0%, transparent 40%),
+      radial-gradient(circle at 10% 85%, rgba(226,101,63,0.15) 0%, transparent 45%);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; max-width: 880px; margin: 0 auto; }
+  .eyebrow{
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+  .hero h1{
+    font-size: clamp(40px, 7vw, 68px);
+    font-weight: 700;
+    margin: 0 0 18px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 500;
+    color: var(--coral);
+  }
+  .hero-route{
+    font-size: 16px;
+    color: rgba(249,242,228,0.75);
+    max-width: 620px;
+    margin-bottom: 36px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap: wrap; gap: 14px;
+  }
+  .meta-pill{
+    border: 1px solid rgba(249,242,228,0.28);
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 13.5px;
+    color: var(--sand-light);
+    background: rgba(249,242,228,0.05);
+    white-space: nowrap;
+  }
+  .meta-pill b{ color: var(--gold); font-weight: 600; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ max-width: 880px; margin: 0 auto; padding: 64px 24px; }
+  .section-head{ margin-bottom: 40px; }
+  .section-head .tag{
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 600;
+    margin-bottom: 10px;
+    display:block;
+  }
+  .section-head h2{
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 600;
+    margin: 0;
+    color: var(--canopy-deep);
+  }
+  .section-head p{
+    margin: 12px 0 0;
+    color: #5c5646;
+    max-width: 620px;
+    font-size: 15.5px;
+  }
+
+  /* ---------- TIMELINE / DAYS ---------- */
+  .timeline{ position: relative; }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left: 33px;
+    top: 10px; bottom: 10px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--gold) 0 6px, transparent 6px 12px);
+    opacity: 0.55;
+  }
+  .day-block{
+    position: relative;
+    padding-left: 84px;
+    margin-bottom: 46px;
+  }
+  .day-block:last-child{ margin-bottom: 0; }
+  .stamp{
+    position:absolute; left: 0; top: 0;
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    border: 2px solid var(--canopy);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background: var(--sand-light);
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .stamp .stamp-num{
+    font-size: 22px; font-weight: 700; color: var(--canopy); line-height:1;
+  }
+  .stamp .stamp-label{
+    font-size: 9px; letter-spacing: 0.08em; color: var(--coral); text-transform: uppercase; margin-top:2px;
+  }
+  .day-header{
+    display:flex; align-items:baseline; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .day-date{ font-size: 13px; color: var(--gold); font-weight:600; letter-spacing: 0.04em;}
+  .day-title{
+    font-size: 21px; font-weight: 600; color: var(--canopy-deep); margin:0;
+  }
+  .stop-list{ margin-top: 16px; }
+  .stop{
+    display:grid;
+    grid-template-columns: 66px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(38,36,29,0.08);
+  }
+  .stop:last-child{ border-bottom: none; }
+  .stop-time{
+    font-size: 13px; font-weight: 600; color: var(--coral);
+    padding-top: 1px;
+  }
+  .stop-name{ font-size: 15.5px; font-weight: 600; color: var(--ink); margin: 0 0 3px; }
+  .stop-blurb{ font-size: 14px; color: #5c5646; margin:0; }
+
+  /* ---------- INFO GRID (prep/food/transport) ---------- */
+  .info-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 640px){ .info-grid{ grid-template-columns: 1fr; } }
+  .info-card{
+    background: var(--sand);
+    border-radius: 14px;
+    padding: 24px 24px 22px;
+    border: 1px solid rgba(22,59,52,0.08);
+  }
+  .info-card h3{
+    font-size: 16.5px; font-weight: 600; color: var(--canopy-deep);
+    margin: 0 0 12px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .info-card h3::before{
+    content:"";
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--coral); flex-shrink:0;
+  }
+  .info-card ul{ margin:0; padding-left: 18px; }
+  .info-card li{ font-size: 14px; color: #46433a; margin-bottom: 9px; }
+  .info-card li:last-child{ margin-bottom:0; }
+  .info-card li b{ color: var(--canopy-deep); font-weight: 600; }
+  .info-card.wide{ grid-column: 1 / -1; }
+
+  /* food tag list */
+  .food-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 6px; }
+  .food-tag{
+    font-size: 13px; padding: 6px 13px; border-radius: 999px;
+    background: var(--canopy); color: var(--sand-light);
+    white-space: nowrap;
+  }
+  .food-tag.alt{ background: var(--coral); }
+
+  /* footer */
+  footer{
+    text-align:center; padding: 40px 24px 60px;
+    color: #8b856f; font-size: 12.5px;
+  }
+  footer .divider{
+    width: 40px; height: 2px; background: var(--gold); margin: 0 auto 18px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Bali Itinerary · 巴厘岛旅行手册</span>
+    <h1>六晚七日的<br><em>热带慢旅程</em></h1>
+    <p class="hero-route">南部海滩起步 → 努沙佩尼达离岛 → 乌鲁瓦图悬崖 → 乌布中部人文 → 南部收尾放松。节奏不赶,每天专注一条主线。</p>
+    <div class="hero-meta">
+      <span class="meta-pill"><b>去程</b>&nbsp; 10月1日 15:00 抵达登巴萨国际机场(DPS)</span>
+      <span class="meta-pill"><b>返程</b>&nbsp; 10月7日 12:10 登巴萨国际机场起飞</span>
+      <span class="meta-pill"><b>时长</b>&nbsp; 6晚7天</span>
+    </div>
+  </div>
+</div>
+
+<section id="itinerary">
+  <div class="section-head">
+    <span class="tag">Day by Day</span>
+    <h2>逐日行程</h2>
+    <p>每天以一个区域为主轴,避免来回折返;每枚"护照章"对应一天。</p>
+  </div>
+
+  <div class="timeline">
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">01</span><span class="stamp-label">Oct 1</span></div>
+      <div class="day-header"><span class="day-date">10月1日 · 周四</span><h3 class="day-title">抵达 · 南部落脚</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">15:00</div><div><p class="stop-name">抵达登巴萨国际机场(DPS)</p><p class="stop-blurb">过关+取行李预留1小时,建议提前订好接机或用Grab叫车。</p></div></div>
+        <div class="stop"><div class="stop-time">17:00</div><div><p class="stop-name">入住南部酒店(库塔 / 水明漾)</p><p class="stop-blurb">离机场近,方便首末两天出行。</p></div></div>
+        <div class="stop"><div class="stop-time">18:30</div><div><p class="stop-name">水明漾海滩日落</p><p class="stop-blurb">轻松散步,顺便倒时差。</p></div></div>
+        <div class="stop"><div class="stop-time">20:00</div><div><p class="stop-name">海滩边晚餐</p><p class="stop-blurb">尝试 Nasi Goreng 炒饭 / Sate 沙爹,先适应口味。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">02</span><span class="stamp-label">Oct 2</span></div>
+      <div class="day-header"><span class="day-date">10月2日 · 周五</span><h3 class="day-title">努沙佩尼达离岛</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">07:00</div><div><p class="stop-name">Sanur 码头出发</p><p class="stop-blurb">快艇约30-45分钟,建议提前订好船票+接送。</p></div></div>
+        <div class="stop"><div class="stop-time">09:00</div><div><p class="stop-name">Kelingking Beach</p><p class="stop-blurb">网红恐龙湾观景台,下海滩需爬陡坡,量力而行,拍照留够时间。</p></div></div>
+        <div class="stop"><div class="stop-time">11:30</div><div><p class="stop-name">Angel's Billabong & Broken Beach</p><p class="stop-blurb">天使泳池+破碎海滩,退潮时最美。</p></div></div>
+        <div class="stop"><div class="stop-time">14:00</div><div><p class="stop-name">Crystal Bay 午餐 / 浮潜</p><p class="stop-blurb">清澈海湾,适合下水浮潜。</p></div></div>
+        <div class="stop"><div class="stop-time">17:00</div><div><p class="stop-name">返回 Sanur</p><p class="stop-blurb">海况可能颠簸,建议提前吃晕船药。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">03</span><span class="stamp-label">Oct 3</span></div>
+      <div class="day-header"><span class="day-date">10月3日 · 周六</span><h3 class="day-title">乌鲁瓦图悬崖海岸</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">10:00</div><div><p class="stop-name">乌鲁瓦图神庙</p><p class="stop-blurb">悬崖海景庙宇,注意猴子会抢眼镜 / 手机。</p></div></div>
+        <div class="stop"><div class="stop-time">12:00</div><div><p class="stop-name">巴东巴东海滩(Padang Padang)</p><p class="stop-blurb">电影《美食祈祷与恋爱》取景地。</p></div></div>
+        <div class="stop"><div class="stop-time">14:00</div><div><p class="stop-name">梅拉斯蒂海滩(Melasti)</p><p class="stop-blurb">白沙悬崖海滩,适合拍照休闲。</p></div></div>
+        <div class="stop"><div class="stop-time">18:00</div><div><p class="stop-name">金巴兰海鲜晚餐</p><p class="stop-blurb">沙滩上现烤海鲜配日落,建议提前订靠海位置。</p></div></div>
+        <div class="stop"><div class="stop-time">19:00</div><div><p class="stop-name">乌鲁瓦图 Kecak 火舞</p><p class="stop-blurb">日落时分的传统表演,建议提前买票。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">04</span><span class="stamp-label">Oct 4</span></div>
+      <div class="day-header"><span class="day-date">10月4日 · 周日</span><h3 class="day-title">转场乌布 · 人文核心</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">09:00</div><div><p class="stop-name">退房,途经海神庙(Tanah Lot)</p><p class="stop-blurb">退潮时可走到礁石上的庙,建议避开正午暴晒人潮。</p></div></div>
+        <div class="stop"><div class="stop-time">13:00</div><div><p class="stop-name">抵达乌布,入住酒店</p><p class="stop-blurb">车程约1.5-2小时,建议中途休息。</p></div></div>
+        <div class="stop"><div class="stop-time">15:00</div><div><p class="stop-name">圣猴森林(Monkey Forest)</p><p class="stop-blurb">看好随身物品,猴子会主动抢东西。</p></div></div>
+        <div class="stop"><div class="stop-time">17:00</div><div><p class="stop-name">乌布皇宫 + 传统市场</p><p class="stop-blurb">逛手工艺品市场,可以砍价。</p></div></div>
+        <div class="stop"><div class="stop-time">19:00</div><div><p class="stop-name">乌布传统舞蹈晚餐</p><p class="stop-blurb">Legong 舞或 Bebek Bengil(脏鸭餐厅)体验当地风味。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">05</span><span class="stamp-label">Oct 5</span></div>
+      <div class="day-header"><span class="day-date">10月5日 · 周一</span><h3 class="day-title">乌布郊区田园</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">08:00</div><div><p class="stop-name">德格拉朗梯田(Tegalalang)</p><p class="stop-blurb">经典绿色阶梯稻田,早上光线好,人少。</p></div></div>
+        <div class="stop"><div class="stop-time">10:30</div><div><p class="stop-name">圣泉寺(Tirta Empul)</p><p class="stop-blurb">体验当地人的净水祈福仪式,需带换洗衣物。</p></div></div>
+        <div class="stop"><div class="stop-time">12:30</div><div><p class="stop-name">咖啡种植园</p><p class="stop-blurb">品尝麝香猫咖啡(Kopi Luwak)及各类香料茶,免费试饮多种口味。</p></div></div>
+        <div class="stop"><div class="stop-time">15:00</div><div><p class="stop-name">特哥能根瀑布(Tegenungan)</p><p class="stop-blurb">离乌布最近的瀑布,可下水戏水。</p></div></div>
+        <div class="stop"><div class="stop-time">17:00</div><div><p class="stop-name">网红秋千 / 悬崖观景台(可选)</p><p class="stop-blurb">若不赶时间可加,适合拍照打卡。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">06</span><span class="stamp-label">Oct 6</span></div>
+      <div class="day-header"><span class="day-date">10月6日 · 周二</span><h3 class="day-title">南部收尾 · 放松</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">09:00</div><div><p class="stop-name">退房,返回南部(水明漾 / 金巴兰)</p><p class="stop-blurb">预留最后一晚方便次日去机场。</p></div></div>
+        <div class="stop"><div class="stop-time">11:00</div><div><p class="stop-name">海滩俱乐部(Beach Club)</p><p class="stop-blurb">如 Potato Head / Finns Beach Club,躺椅+泳池+饮品,悠闲一天。</p></div></div>
+        <div class="stop"><div class="stop-time">14:00</div><div><p class="stop-name">传统 SPA 按摩</p><p class="stop-blurb">巴厘岛按摩性价比高,推荐做一次全身按摩放松。</p></div></div>
+        <div class="stop"><div class="stop-time">16:00</div><div><p class="stop-name">购物</p><p class="stop-blurb">水明漾有不少设计师小店和手工艺品店。</p></div></div>
+        <div class="stop"><div class="stop-time">18:30</div><div><p class="stop-name">告别日落晚餐</p><p class="stop-blurb">选一家海边餐厅作为旅程收尾。</p></div></div>
+      </div>
+    </div>
+
+    <div class="day-block">
+      <div class="stamp"><span class="stamp-num">07</span><span class="stamp-label">Oct 7</span></div>
+      <div class="day-header"><span class="day-date">10月7日 · 周三</span><h3 class="day-title">返程</h3></div>
+      <div class="stop-list">
+        <div class="stop"><div class="stop-time">08:00</div><div><p class="stop-name">早餐,收拾行李</p><p class="stop-blurb">退房前确认好房间物品。</p></div></div>
+        <div class="stop"><div class="stop-time">09:30</div><div><p class="stop-name">前往机场</p><p class="stop-blurb">南部酒店到机场车程约20-40分钟,预留缓冲时间。</p></div></div>
+        <div class="stop"><div class="stop-time">12:10</div><div><p class="stop-name">登巴萨国际机场回程</p><p class="stop-blurb">国际航班建议提前2.5-3小时到达机场。</p></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="prep">
+  <div class="section-head">
+    <span class="tag">Before You Go</span>
+    <h2>行前准备</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>签证与证件</h3>
+      <ul>
+        <li>中国护照可办<b>落地签(VOA)</b>,30天有效,费用约50万印尼盾(约230元人民币)</li>
+        <li>建议提前在官方渠道办理<b>电子落地签(eVOA)</b>,省去现场排队</li>
+        <li>护照有效期需<b>6个月以上</b>,打印/存好酒店预订单和回程机票</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>货币与支付</h3>
+      <ul>
+        <li>印尼盾(IDR),建议到市区<b>正规货币兑换点</b>换汇,机场汇率较差</li>
+        <li>街边"看起来太划算"的小店多是骗局,认准口碑好的连锁店</li>
+        <li>酒店/大餐厅可刷卡,<b>沙滩摊位与市场只收现金</b>,随身备小额现金</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>网络通讯</h3>
+      <ul>
+        <li>建议提前买好<b>当地 eSIM</b>(Telkomsel / XL Axiata)</li>
+        <li>机场也有柜台现场办理</li>
+        <li>方便使用 Grab / Gojek 叫车软件</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>天气与穿着</h3>
+      <ul>
+        <li>10月处于旱季转雨季过渡期,总体多晴,偶有短时阵雨</li>
+        <li>带<b>雨伞/薄雨衣</b>,天气炎热潮湿,轻薄透气衣物为主</li>
+        <li>防晒霜、墨镜、遮阳帽必备;进庙宇需着<b>长裤/纱笼</b>遮膝盖</li>
+      </ul>
+    </div>
+    <div class="info-card wide">
+      <h3>健康提醒</h3>
+      <ul>
+        <li>自来水<b>不可直接饮用</b>,买瓶装水</li>
+        <li>蚊虫较多(有登革热风险),带好<b>驱蚊液</b></li>
+        <li>建议购买<b>境外旅行医疗保险</b>,涵盖突发疾病和意外</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="transport">
+  <div class="section-head">
+    <span class="tag">Getting Around</span>
+    <h2>当地交通方式</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Grab / Gojek 网约车</h3>
+      <ul>
+        <li>南部和乌布市区很方便,价格透明,推荐作为主力交通方式</li>
+        <li>机场内不能直接上车,需按标识走到指定接客点</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>包车 / 司机一日游</h3>
+      <ul>
+        <li>适合努沙佩尼达、乌鲁瓦图、乌布郊区这类多点行程</li>
+        <li>一天约35-50万印尼盾(不含油费门票),酒店或旅行平台可预订</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>摩托车租赁</h3>
+      <ul>
+        <li>自由但路况复杂,交通较乱,需有摩托车驾照/国际驾照</li>
+        <li>印尼对国际驾照认可度有限,交警查车常见,务必戴头盔</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>努沙佩尼达当地</h3>
+      <ul>
+        <li>岛上路况颠簸</li>
+        <li>通常包车+快艇套餐一起订最省心</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="food">
+  <div class="section-head">
+    <span class="tag">Eat & Drink</span>
+    <h2>美食清单</h2>
+    <p>巴厘岛是印尼少有的印度教为主的岛屿,猪肉菜品在当地很常见。</p>
+  </div>
+  <div class="info-card wide" style="margin-bottom:18px;">
+    <h3>必吃菜品</h3>
+    <div class="food-tags">
+      <span class="food-tag">Nasi / Mie Goreng 炒饭炒面</span>
+      <span class="food-tag alt">Sate Lilit 沙爹肉串</span>
+      <span class="food-tag">Babi Guling 烤乳猪</span>
+      <span class="food-tag alt">Bebek Betutu 香料烟熏鸭</span>
+      <span class="food-tag">Lawar 蔬菜拌肉末沙拉</span>
+      <span class="food-tag alt">Gado-Gado 花生酱沙拉</span>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>推荐餐厅</h3>
+      <ul>
+        <li>乌布 <b>Bebek Bengil(脏鸭餐厅)</b> —— 招牌脆皮鸭</li>
+        <li><b>Locavore</b> —— 高端创意料理,需提前订位</li>
+        <li>金巴兰海滩系列 —— 现烤海鲜配日落</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>水果与饮品</h3>
+      <ul>
+        <li>山竹、红毛丹、蛇皮果都很划算新鲜</li>
+        <li><b>Kopi Luwak(麝香猫咖啡)</b>和各类香料茶,咖啡园可免费试饮</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="etiquette">
+  <div class="section-head">
+    <span class="tag">Good to Know</span>
+    <h2>礼仪与安全注意事项</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-card wide">
+      <h3>寺庙与文化礼仪</h3>
+      <ul>
+        <li>寺庙内不可用手指指佛像,不要摸别人的头(当地文化中头部神圣)</li>
+        <li>进出用<b>右手</b>接递物品</li>
+        <li>地上常有黄色小椰叶祭祀盘(Canang Sari),注意<b>不要踩踏</b></li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>动物与随身物品</h3>
+      <ul>
+        <li>乌鲁瓦图神庙、圣猴森林一带猴子多,收好眼镜、手机、耳环</li>
+        <li>它们会主动抢东西,切勿正面对抗</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>市场与预订</h3>
+      <ul>
+        <li>市场砍价是常态,通常可砍到标价的一半左右</li>
+        <li>Kecak 火舞表演和努沙佩尼达行程建议<b>提前1-2天</b>预订,旺季容易约满</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="divider"></div>
+  Bali · 2026.10.1 – 10.7 &nbsp;|&nbsp; 节奏不赶,慢慢玩
+</footer>
+
+</body>
+</html>
