@@ -18,988 +18,761 @@
     --paper: #FBF7EF;
   }
   *{ box-sizing: border-box; }
-  html, body{ height: 100%; }
+  html{ scroll-behavior: smooth; }
   body{
     margin:0;
     background: var(--paper);
     color: var(--ink);
     font-family: "Work Sans", "Noto Sans SC", sans-serif;
     line-height: 1.6;
-    overflow: hidden;
   }
-  h1,h2,h3, .stamp-num{ font-family: "Fraunces", "Noto Serif SC", serif; }
+  h1,h2,h3,h4, .stamp-num{ font-family: "Fraunces", "Noto Serif SC", serif; }
   a { color: inherit; }
-  button{ font-family: inherit; }
   :focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
 
-  /* ---------- APP SHELL ---------- */
-  .app{ display:flex; height: 100vh; }
-
-  /* ---------- SIDEBAR ---------- */
-  .sidebar{
-    width: 264px;
-    flex-shrink: 0;
-    background: radial-gradient(ellipse at 20% 0%, #1F4A41 0%, var(--canopy) 45%, var(--canopy-deep) 100%);
-    color: var(--sand-light);
-    padding: 30px 18px;
-    overflow-y: auto;
-    display:flex;
-    flex-direction: column;
-  }
-  .brand{ padding: 0 10px 22px; margin-bottom: 14px; border-bottom: 1px solid rgba(249,242,228,0.14); }
-  .brand .eyebrow{
-    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); font-weight: 600; margin-bottom: 8px; display:block;
-  }
-  .brand h1{ font-size: 21px; margin: 0; line-height: 1.25; font-weight: 600; }
-  .brand h1 em{ font-style: italic; font-weight: 500; color: var(--coral); }
-  .nav-list{ list-style:none; margin:0; padding:0; flex:1; }
-  .nav-item{ margin-bottom: 3px; }
-  .nav-btn{
-    width: 100%; text-align:left; display:flex; align-items:baseline; gap: 10px;
-    background: none; border: none; color: rgba(249,242,228,0.72);
-    padding: 9px 10px; border-radius: 9px; cursor: pointer; font-size: 13.5px;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  .nav-btn .n{ font-family:"Fraunces","Noto Serif SC",serif; font-style: italic; color: var(--gold); font-size: 12.5px; flex-shrink:0; width: 18px; }
-  .nav-btn:hover{ background: rgba(249,242,228,0.08); color: var(--sand-light); }
-  .nav-item.active .nav-btn{ background: rgba(226,101,63,0.22); color: var(--sand-light); font-weight: 600; }
-  .sidebar-foot{ font-size: 11.5px; color: rgba(249,242,228,0.45); padding: 14px 10px 0; border-top: 1px solid rgba(249,242,228,0.14); margin-top: 14px; }
-
-  /* ---------- MAIN ---------- */
-  .main{ flex:1; overflow-y: auto; padding: 56px 48px 40px; }
-  .page{ display:none; max-width: 1040px; margin: 0 auto; }
-  .page.active{ display:block; animation: fade .25s ease; }
-  @keyframes fade{ from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform:none; } }
-  @media (prefers-reduced-motion: reduce){ .page.active{ animation:none; } }
-
-  .page-head{ margin-bottom: 28px; }
-  .page-head .tag{
-    font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--coral); font-weight: 600; margin-bottom: 10px; display:flex; align-items:baseline; gap:10px;
-  }
-  .page-head .tag .num{ color: var(--gold); font-family:"Fraunces","Noto Serif SC",serif; font-style:italic; }
-  .page-head h2{ font-size: clamp(24px, 3vw, 32px); font-weight: 600; margin: 0; color: var(--canopy-deep); text-wrap: balance; }
-  .page-head p{ margin: 10px 0 0; color: #5c5646; max-width: 640px; font-size: 14.5px; }
-
-  /* ---------- SPREAD (book layout) ---------- */
-  .spread{
-    display:grid; grid-template-columns: 1fr 1fr;
-    background: var(--sand-light);
-    border-radius: 18px;
-    border: 1px solid rgba(22,59,52,0.1);
+  /* ---------- HERO ---------- */
+  .hero{
     position: relative;
-    box-shadow: 0 1px 0 rgba(22,59,52,0.03);
+    background: radial-gradient(ellipse at 20% 20%, #1F4A41 0%, var(--canopy) 45%, var(--canopy-deep) 100%);
+    color: var(--sand-light);
+    padding: 80px 24px 56px;
+    overflow: hidden;
   }
-  .spread::before{
-    content:""; position:absolute; left:50%; top:28px; bottom:28px; width:1px;
-    background: linear-gradient(to bottom, transparent, rgba(190,149,48,0.5) 15%, rgba(190,149,48,0.5) 85%, transparent);
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 85% 15%, rgba(190,149,48,0.18) 0%, transparent 40%),
+      radial-gradient(circle at 10% 85%, rgba(226,101,63,0.15) 0%, transparent 45%);
+    pointer-events:none;
   }
-  .spread.single{ grid-template-columns: 1fr; }
-  .spread.single::before{ display:none; }
-  .leaf{ padding: 30px 32px; min-width: 0; }
-  .leaf-label{
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
-    font-weight: 700; margin-bottom: 14px;
+  .hero-inner{ position:relative; max-width: 1000px; margin: 0 auto; }
+  .eyebrow{ font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 600; }
+  .hero h1{ font-size: clamp(34px, 6vw, 58px); font-weight: 700; margin: 0 0 16px; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; }
+  .hero h1 em{ font-style: italic; font-weight: 500; color: var(--coral); }
+  .hero-route{ font-size: 15.5px; color: rgba(249,242,228,0.75); max-width: 640px; margin-bottom: 26px; }
+  .hero-meta{ display:flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+  .meta-pill{ border: 1px solid rgba(249,242,228,0.28); border-radius: 999px; padding: 8px 16px; font-size: 13px; color: var(--sand-light); background: rgba(249,242,228,0.05); white-space: nowrap; }
+  .meta-pill b{ color: var(--gold); font-weight: 600; }
+  .keyword-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .keyword{ font-size: 12px; padding: 5px 12px; border-radius: 999px; background: rgba(226,101,63,0.16); border: 1px solid rgba(226,101,63,0.35); color: var(--sand-light); }
+
+  /* ---------- STICKY QUICK NAV ---------- */
+  .quicknav{
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(14,42,37,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(249,242,228,0.1);
   }
-  @media (max-width: 860px){
-    .spread{ grid-template-columns: 1fr; }
-    .spread::before{ display:none; }
+  .quicknav-inner{
+    max-width: 1000px; margin: 0 auto; padding: 10px 24px;
+    display:flex; gap: 6px; overflow-x: auto; scrollbar-width: thin;
   }
+  .quicknav a{
+    flex-shrink:0; font-size: 12.5px; color: rgba(249,242,228,0.68); text-decoration:none;
+    padding: 6px 12px; border-radius: 999px; white-space:nowrap; transition: background .15s, color .15s;
+  }
+  .quicknav a:hover{ background: rgba(249,242,228,0.1); color: var(--sand-light); }
+  .quicknav a .n{ color: var(--gold); font-family:"Fraunces","Noto Serif SC",serif; font-style:italic; margin-right: 4px; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ max-width: 1000px; margin: 0 auto; padding: 52px 24px; scroll-margin-top: 56px; }
+  .section-head{ margin-bottom: 28px; }
+  .section-head .tag{ font-size: 12.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--coral); font-weight: 600; margin-bottom: 10px; display:flex; align-items:baseline; gap:10px; }
+  .section-head .tag .num{ color: var(--gold); font-family:"Fraunces","Noto Serif SC",serif; font-style:italic; }
+  .section-head h2{ font-size: clamp(24px, 3.4vw, 32px); font-weight: 600; margin: 0; color: var(--canopy-deep); text-wrap: balance; }
+  .section-head p{ margin: 10px 0 0; color: #5c5646; max-width: 640px; font-size: 14.5px; }
+
+  /* ---------- TWO-COLUMN SPLIT ---------- */
+  .split{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items:start; }
+  @media (max-width: 760px){ .split{ grid-template-columns: 1fr; } }
+  .col-label{ font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
 
   /* ---------- TABLES ---------- */
-  .table-wrap{ overflow-x: auto; border-radius: 12px; border: 1px solid rgba(22,59,52,0.1); }
-  table{ border-collapse: collapse; width: 100%; min-width: 460px; font-size: 13.5px; background: var(--paper); }
-  thead th{
-    background: var(--canopy); color: var(--sand-light); text-align: left;
-    padding: 10px 14px; font-weight: 600; font-size: 12px; letter-spacing: 0.03em; white-space: nowrap;
-  }
+  .table-wrap{ overflow-x: auto; border-radius: 12px; border: 1px solid rgba(22,59,52,0.1); background: var(--sand-light); }
+  table{ border-collapse: collapse; width: 100%; min-width: 420px; font-size: 13.5px; }
+  thead th{ background: var(--canopy); color: var(--sand-light); text-align: left; padding: 10px 14px; font-weight: 600; font-size: 12px; letter-spacing: 0.03em; white-space: nowrap; }
   tbody td{ padding: 10px 14px; border-bottom: 1px solid rgba(22,59,52,0.08); color: #46433a; vertical-align: top; }
   tbody tr:last-child td{ border-bottom: none; }
   tbody td:first-child{ font-weight: 600; color: var(--canopy-deep); white-space: nowrap; }
   tbody tr:nth-child(even){ background: rgba(190,149,48,0.05); }
-  .table-title{ font-size: 14px; font-weight: 600; color: var(--canopy-deep); margin: 0 0 10px; }
-  .block + .block{ margin-top: 20px; }
-
+  .block + .block{ margin-top: 16px; }
   .pill-tag{ display:inline-block; font-size: 11px; padding: 3px 10px; border-radius: 999px; background: var(--canopy); color: var(--sand-light); font-weight:600; }
   .pill-tag.alt{ background: var(--coral); }
 
-  /* ---------- CARDS ---------- */
-  .mini-card{ background: var(--sand); border-radius: 12px; padding: 16px 18px; border: 1px solid rgba(22,59,52,0.08); }
-  .mini-card + .mini-card{ margin-top: 12px; }
-  .mini-card h4{ font-size: 14.5px; font-weight: 600; color: var(--canopy-deep); margin: 0 0 8px; display:flex; align-items:center; gap:8px; }
-  .mini-card h4::before{ content:""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink:0; }
-  .mini-card p{ margin:0; font-size: 13.5px; color: #46433a; }
-  .mini-card .meta{ font-size: 12px; color: var(--gold); font-weight: 600; margin-top: 6px; }
-
-  /* ---------- DAY NAV ---------- */
-  .day-tabs{ display:flex; flex-wrap:wrap; gap: 8px; margin-bottom: 22px; }
-  .day-tab{
-    border: 1px solid rgba(22,59,52,0.18); background: var(--sand-light); color: var(--canopy-deep);
-    padding: 7px 15px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer;
-    transition: background .15s ease, color .15s ease;
-  }
-  .day-tab:hover{ background: var(--sand); }
-  .day-tab.active{ background: var(--canopy); color: var(--sand-light); border-color: var(--canopy); }
-  .day-panel{ display:none; }
-  .day-panel.active{ display:block; }
-  .day-stamp-row{ display:flex; align-items:center; gap: 14px; margin-bottom: 16px; }
-  .day-stamp{
-    width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--canopy);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; background: var(--paper); flex-shrink:0;
-  }
-  .day-stamp .num{ font-size: 17px; font-weight:700; color: var(--canopy); line-height:1; }
+  /* ---------- DAY GRID ---------- */
+  .day-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px){ .day-grid{ grid-template-columns: 1fr; } }
+  .day-card{ background: var(--sand-light); border: 1px solid rgba(22,59,52,0.1); border-radius: 16px; padding: 24px; }
+  .day-stamp-row{ display:flex; align-items:center; gap: 13px; margin-bottom: 14px; }
+  .day-stamp{ width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--canopy); display:flex; flex-direction:column; align-items:center; justify-content:center; background: var(--paper); flex-shrink:0; }
+  .day-stamp .num{ font-size: 16px; font-weight:700; color: var(--canopy); line-height:1; }
   .day-stamp .lbl{ font-size: 8px; letter-spacing:0.05em; color: var(--coral); text-transform:uppercase; margin-top:1px; }
-  .day-stay{ font-size: 12.5px; color: var(--gold); font-weight:600; display:block; margin-bottom: 3px; }
-  .day-title{ font-size: 18px; font-weight:600; color: var(--canopy-deep); margin:0; }
-  .day-highlight{ font-size: 13.5px; color: #5c5646; margin-top: 10px; }
+  .day-stay{ font-size: 12px; color: var(--gold); font-weight:600; display:block; margin-bottom: 2px; }
+  .day-title{ font-size: 17px; font-weight:600; color: var(--canopy-deep); margin:0; }
+  .day-highlight{ font-size: 13px; color: #5c5646; margin: 0 0 14px; }
+  .day-budget-line{ font-size: 12.5px; color: #5c5646; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(22,59,52,0.15); }
+  .day-budget-line b{ color: var(--canopy-deep); }
 
-  /* ---------- INFO GRID (notes page uses within a leaf) ---------- */
-  .info-mini{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  @media (max-width: 500px){ .info-mini{ grid-template-columns: 1fr; } }
+  /* ---------- CARDS ---------- */
+  .mini-card{ background: var(--sand); border-radius: 12px; padding: 15px 17px; border: 1px solid rgba(22,59,52,0.08); }
+  .mini-card + .mini-card{ margin-top: 10px; }
+  .mini-card h4{ font-size: 14px; font-weight: 600; color: var(--canopy-deep); margin: 0 0 6px; display:flex; align-items:center; gap:8px; }
+  .mini-card h4::before{ content:""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink:0; }
+  .mini-card p{ margin:0; font-size: 13px; color: #46433a; }
+  .mini-card .meta{ font-size: 11.5px; color: var(--gold); font-weight: 600; margin-top: 5px; }
+
+  /* ---------- INFO GRID (notes) ---------- */
+  .info-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 640px){ .info-grid{ grid-template-columns: 1fr; } }
+  .info-card{ background: var(--sand); border-radius: 14px; padding: 20px 20px 18px; border: 1px solid rgba(22,59,52,0.08); }
+  .info-card h3{ font-size: 15.5px; font-weight: 600; color: var(--canopy-deep); margin: 0 0 10px; display:flex; align-items:center; gap:9px; }
+  .info-card h3::before{ content:""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); flex-shrink:0; }
+  .info-card p{ margin:0; font-size: 13.5px; color: #46433a; }
+  .info-card.new{ border: 1px solid rgba(226,101,63,0.4); }
+  .info-card.new h3::before{ background: var(--gold); }
 
   /* selling points */
-  .sell-card{ background: var(--canopy-deep); color: var(--sand-light); border-radius: 12px; padding: 16px 18px; }
-  .sell-card + .sell-card{ margin-top: 12px; }
+  .sell-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  @media (max-width: 640px){ .sell-grid{ grid-template-columns: 1fr; } }
+  .sell-card{ background: var(--canopy-deep); color: var(--sand-light); border-radius: 12px; padding: 17px 19px; }
   .sell-card .dim{ font-size: 11px; letter-spacing:0.12em; text-transform:uppercase; color: var(--gold); margin-bottom:6px; font-weight:700; }
   .sell-card p{ margin:0; font-size: 13.5px; color: rgba(249,242,228,0.9); }
 
-  /* budget range bar */
-  .range-bar{ margin-top: 18px; }
+  /* budget range */
+  .range-bar{ margin-top: 16px; }
   .range-bar .track{ position:relative; height: 8px; border-radius: 999px; background: rgba(22,59,52,0.1); margin: 30px 4px 10px; }
   .range-bar .fill{ position:absolute; top:0; bottom:0; left:0%; right:38%; background: var(--gold); border-radius: 999px; opacity:0.55; }
-  .range-bar .marker{ position:absolute; top:-22px; transform: translateX(-50%); font-size:11.5px; font-weight:700; color: var(--coral); white-space:nowrap; }
+  .range-bar .marker{ position:absolute; top:-22px; transform: translateX(-50%); font-size:11px; font-weight:700; color: var(--coral); white-space:nowrap; }
   .range-bar .marker::after{ content:""; position:absolute; left:50%; top:20px; width:2px; height:16px; background: var(--coral); transform: translateX(-50%); }
-  .range-bar .endlabel{ display:flex; justify-content:space-between; font-size:12px; color:#5c5646; }
+  .range-bar .endlabel{ display:flex; justify-content:space-between; font-size:11.5px; color:#5c5646; }
+  .budget-target{ margin-top: 14px; font-size: 13px; padding: 12px 16px; border-radius: 10px; background: rgba(226,101,63,0.1); border: 1px solid rgba(226,101,63,0.3); color: var(--canopy-deep); }
+  .budget-target b{ color: var(--coral); }
 
   .keyword-chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
   .keyword-chip{ font-size: 12.5px; padding: 6px 13px; border-radius: 999px; background: var(--canopy); color: var(--sand-light); }
-
-  .budget-target{
-    margin-top: 16px; font-size: 13.5px; padding: 12px 16px; border-radius: 10px;
-    background: rgba(226,101,63,0.1); border: 1px solid rgba(226,101,63,0.3); color: var(--canopy-deep);
-  }
-  .budget-target b{ color: var(--coral); }
-
-  /* page nav (prev/next) */
-  .page-turn{ display:flex; justify-content:space-between; align-items:center; margin-top: 26px; }
-  .turn-btn{
-    display:flex; align-items:center; gap:8px; background: var(--canopy); color: var(--sand-light);
-    border:none; padding: 10px 18px; border-radius: 999px; font-size: 13.5px; font-weight:600; cursor:pointer;
-    transition: background .15s ease;
-  }
-  .turn-btn:hover{ background: var(--canopy-deep); }
-  .turn-btn.ghost{ visibility:hidden; }
-  .page-count{ font-size: 12.5px; color: #8b856f; }
-
   ul.plain{ margin:0; padding-left: 20px; }
   ul.plain li{ font-size: 13.5px; margin-bottom: 7px; color: #3a3830; }
   ul.plain li b{ color: var(--canopy-deep); }
 
-  /* cover page */
-  .cover-kw{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 14px; }
-  .cover-kw .keyword{ font-size: 12px; padding: 5px 12px; border-radius:999px; background: rgba(226,101,63,0.12); border:1px solid rgba(226,101,63,0.3); color: var(--coral); font-weight:600; }
-  .cover-meta-list{ list-style:none; margin:0; padding:0; }
-  .cover-meta-list li{ display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px dashed rgba(22,59,52,0.15); font-size: 13.5px; }
-  .cover-meta-list li:last-child{ border-bottom:none; }
-  .cover-meta-list b{ color: var(--canopy-deep); }
-
-  /* mobile: collapse sidebar to top bar */
-  @media (max-width: 760px){
-    .app{ flex-direction: column; }
-    .sidebar{ width:100%; height:auto; max-height: 32vh; padding: 16px; }
-    .main{ padding: 28px 18px 40px; }
+  /* ---------- MAP OVERVIEW ---------- */
+  .map-wrap{ background: var(--sand-light); border: 1px solid rgba(22,59,52,0.1); border-radius: 18px; padding: 32px 28px; }
+  .route-row{ display:flex; align-items:stretch; gap: 6px; }
+  @media (max-width: 820px){ .route-row{ flex-direction: column; } }
+  .route-stop{ flex:1; display:flex; flex-direction:column; }
+  .stop-node{ display:flex; align-items:center; gap:10px; margin-bottom: 14px; }
+  .stop-dot{ width: 14px; height: 14px; border-radius: 50%; background: var(--coral); border: 3px solid var(--sand-light); box-shadow: 0 0 0 2px var(--coral); flex-shrink:0; }
+  .stop-name{ font-size: 16px; font-weight: 600; color: var(--canopy-deep); }
+  .stop-days{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 12px; }
+  .stop-day-badge{ font-size: 11px; font-weight:700; color: var(--sand-light); background: var(--canopy); padding: 3px 9px; border-radius:999px; }
+  .stop-activities{ list-style:none; margin:0; padding:0; flex:1; }
+  .stop-activities li{ font-size: 13px; color: #46433a; padding: 6px 0; border-bottom: 1px dashed rgba(22,59,52,0.12); }
+  .stop-activities li:last-child{ border-bottom:none; }
+  .stop-activities li b{ color: var(--canopy-deep); }
+  .route-link{
+    flex-shrink:0; width: 64px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color: var(--gold); font-size: 11px; text-align:center; gap: 4px; padding-top: 26px;
   }
+  @media (max-width: 820px){ .route-link{ width:100%; flex-direction:row; justify-content:center; padding: 10px 0; } }
+  .route-link .arrow{ font-size: 20px; line-height:1; }
+  .route-link .time{ color: #8b856f; font-size: 11px; }
+
+  /* footer */
+  footer{ text-align:center; padding: 40px 24px 60px; color: #8b856f; font-size: 12.5px; }
+  footer .divider{ width: 40px; height: 2px; background: var(--gold); margin: 0 auto 18px; }
+
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 </style>
 </head>
 <body>
 
-<div class="app">
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="eyebrow">Bali Itinerary · 方案C</span>
-      <h1>山谷与<em>海崖</em>之旅</h1>
+<div class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Bali Itinerary · 方案C 交付件</span>
+    <h1>8天7晚的<br><em>山谷与海崖之旅</em></h1>
+    <p class="hero-route">路线:乌布 3晚 → Sidemen 2晚 → 乌鲁瓦图 2晚。从文化饮食到山谷田野,再到悬崖海景,层次递进,不重复、不赶场。</p>
+    <div class="hero-meta">
+      <span class="meta-pill"><b>路线</b>&nbsp; 乌布 → Sidemen → 乌鲁瓦图</span>
+      <span class="meta-pill"><b>预算</b>&nbsp; 约 RMB 15,000/人(双人同行,不含国际机票)</span>
+      <span class="meta-pill"><b>时长</b>&nbsp; 8天7晚</span>
     </div>
-    <ul class="nav-list" id="navList">
-      <li class="nav-item"><button class="nav-btn" data-page="cover"><span class="n">·</span>封面</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="overview"><span class="n">一</span>行程总览</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="daily"><span class="n">二</span>每日详细执行</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="hotels"><span class="n">三</span>酒店清单</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="food"><span class="n">四</span>餐厅清单</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="spa"><span class="n">五</span>SPA与疗愈</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="transport"><span class="n">六</span>交通衔接逻辑</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="budget"><span class="n">七</span>预算总表</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="priority"><span class="n">八</span>预订优先级</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="notes"><span class="n">九</span>执行注意事项</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="final"><span class="n">十</span>建议预订版本</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="sell"><span class="n">十一</span>核心卖点</button></li>
-      <li class="nav-item"><button class="nav-btn" data-page="summary"><span class="n">十二</span>简版摘要</button></li>
-    </ul>
-    <div class="sidebar-foot">点击左侧章节跳转,或用每页底部的翻页按钮</div>
-  </aside>
-
-  <main class="main" id="main">
-
-    <!-- COVER -->
-    <div class="page" data-page="cover">
-      <div class="page-head">
-        <span class="tag"><span class="num">·</span>Cover</span>
-        <h2>8天7晚的山谷与海崖之旅</h2>
-        <p>路线:乌布 3晚 → Sidemen 2晚 → 乌鲁瓦图 2晚。从文化饮食到山谷田野,再到悬崖海景,层次递进,不重复、不赶场。</p>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">关于这次旅行</div>
-          <p style="font-size:14px; color:#46433a; margin:0 0 16px;">适合不想重复、讨厌赶场、想要层次感和高级松弛感的旅行者。全程分段包车,没有快船,不被海况影响。</p>
-          <div class="cover-kw">
-            <span class="keyword">authentic</span>
-            <span class="keyword">疗愈</span>
-            <span class="keyword">山谷田野</span>
-            <span class="keyword">悬崖海景</span>
-            <span class="keyword">审美度假</span>
-            <span class="keyword">不重复不赶场</span>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">基本信息</div>
-          <ul class="cover-meta-list">
-            <li><span>路线</span><b>乌布 → Sidemen → 乌鲁瓦图</b></li>
-            <li><span>时长</span><b>8天7晚</b></li>
-            <li><span>预算</span><b>约 RMB 15,000/人</b></li>
-            <li><span>同行方式</span><b>双人同行,不含国际机票</b></li>
-          </ul>
-        </div>
-      </div>
-      <div class="page-turn"><span class="turn-btn ghost">占位</span><span class="page-count">1 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
+    <div class="keyword-row">
+      <span class="keyword">authentic</span>
+      <span class="keyword">疗愈</span>
+      <span class="keyword">山谷田野</span>
+      <span class="keyword">悬崖海景</span>
+      <span class="keyword">审美度假</span>
+      <span class="keyword">不重复不赶场</span>
     </div>
-
-    <!-- OVERVIEW -->
-    <div class="page" data-page="overview">
-      <div class="page-head">
-        <span class="tag"><span class="num">一</span>Overview</span>
-        <h2>行程总览</h2>
-      </div>
-      <div class="spread single">
-        <div class="leaf">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>天数</th><th>城市/区域</th><th>住宿</th><th>核心主题</th><th>重点体验</th></tr></thead>
-              <tbody>
-                <tr><td>D1</td><td>抵达巴厘岛 → 乌布</td><td>Bisma Eight Ubud</td><td>落地缓冲</td><td>接机、酒店休息、落地按摩、晚餐</td></tr>
-                <tr><td>D2</td><td>乌布</td><td>Bisma Eight Ubud</td><td>文化饮食日</td><td>巴厘烹饪课、稻田/步道散步、瑜伽/冥想</td></tr>
-                <tr><td>D3</td><td>乌布</td><td>Bisma Eight Ubud</td><td>仪式疗愈日</td><td>Tirta Empul净身、深层SPA、安静晚餐</td></tr>
-                <tr><td>D4</td><td>乌布 → Sidemen</td><td>Wapa di Ume Sidemen</td><td>进入山谷田野</td><td>沿途风景、入住山谷酒店、下午发呆/轻徒步</td></tr>
-                <tr><td>D5</td><td>Sidemen</td><td>Wapa di Ume Sidemen</td><td>authentic乡野日</td><td>梯田徒步、村落体验、花浴/按摩、火山云景</td></tr>
-                <tr><td>D6</td><td>Sidemen → 乌鲁瓦图</td><td>Anantara Uluwatu Bali Resort</td><td>从山到海</td><td>长途换区、海景酒店、轻松收尾</td></tr>
-                <tr><td>D7</td><td>乌鲁瓦图</td><td>Anantara Uluwatu Bali Resort</td><td>悬崖海景高潮日</td><td>海滩、SPA、Uluwatu寺、Kecak火舞、正式晚餐</td></tr>
-                <tr><td>D8</td><td>乌鲁瓦图 → 机场</td><td>—</td><td>返程</td><td>早餐、退房、送机</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">2 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- DAILY -->
-    <div class="page" data-page="daily">
-      <div class="page-head">
-        <span class="tag"><span class="num">二</span>Day by Day</span>
-        <h2>每日详细执行</h2>
-      </div>
-      <div class="day-tabs" id="dayTabs">
-        <button class="day-tab active" data-day="d1">D1 乌布</button>
-        <button class="day-tab" data-day="d2">D2 乌布</button>
-        <button class="day-tab" data-day="d3">D3 乌布</button>
-        <button class="day-tab" data-day="d4">D4 Sidemen</button>
-        <button class="day-tab" data-day="d5">D5 Sidemen</button>
-        <button class="day-tab" data-day="d6">D6 乌鲁瓦图</button>
-        <button class="day-tab" data-day="d7">D7 乌鲁瓦图</button>
-        <button class="day-tab" data-day="d8">D8 返程</button>
-      </div>
-
-      <div class="day-panel active" data-day="d1">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">01</span><span class="lbl">Ubud</span></div>
-              <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">抵达巴厘岛 → 乌布</h3></div>
-            </div>
-            <p class="day-highlight">落地缓冲日:接机、酒店休息、落地按摩、晚餐。抵达日以顺利落地为主,不建议安排景点。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D1 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>接机</td><td>IDR 350,000–500,000/车</td></tr>
-                  <tr><td>住宿</td><td>RMB 1,400–2,200/晚/间</td></tr>
-                  <tr><td>SPA</td><td>RMB 240–600/2人</td></tr>
-                  <tr><td>晚餐</td><td>RMB 300–500/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>抵达后</td><td>DPS 入境</td><td>提前准备电子落地签、海关申报</td></tr>
-                  <tr><td>抵达后</td><td>前往乌布酒店(约1.5–2h)</td><td>酒店接机或包车司机</td></tr>
-                  <tr><td>下午</td><td>check-in,泳池放空</td><td>Bisma Eight Ubud</td></tr>
-                  <tr><td>17:00–18:30</td><td>落地按摩</td><td>Karsa Spa / 酒店SPA</td></tr>
-                  <tr><td>19:30</td><td>晚餐</td><td>Hujan Locale / Nusantara</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d2">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">02</span><span class="lbl">Ubud</span></div>
-              <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">文化与饮食 authentic day</h3></div>
-            </div>
-            <p class="day-highlight">烹饪课 + 步道 + 瑜伽冥想,乌布的经典一天,晚上氛围感拉满。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D2 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>烹饪课</td><td>RMB 400–700/2人</td></tr>
-                  <tr><td>瑜伽/冥想</td><td>RMB 160–360/2人</td></tr>
-                  <tr><td>晚餐</td><td>RMB 300–500/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>07:30–08:00</td><td>早餐</td><td>慢起即可</td></tr>
-                  <tr><td>08:30–13:30</td><td>巴厘烹饪课(含市场)</td><td>Paon Bali Cooking Class</td></tr>
-                  <tr><td>14:30–16:00</td><td>回酒店午休/泳池</td><td>不加额外景点</td></tr>
-                  <tr><td>16:30–17:30</td><td>步道慢走</td><td>Campuhan Ridge Walk</td></tr>
-                  <tr><td>18:00–19:00</td><td>瑜伽/冥想/音疗</td><td>The Yoga Barn</td></tr>
-                  <tr><td>20:00</td><td>晚餐</td><td>Merlin's / Donna Ubud</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d3">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">03</span><span class="lbl">Ubud</span></div>
-              <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">净身仪式 + 深层疗愈</h3></div>
-            </div>
-            <p class="day-highlight">Tirta Empul净身仪式 + 深层SPA,这晚适合收心,安静正餐。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D3 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>包车半天/全天</td><td>IDR 600,000–800,000/车</td></tr>
-                  <tr><td>寺庙门票及仪式相关</td><td>预留 RMB 80–200/2人</td></tr>
-                  <tr><td>午餐</td><td>RMB 150–300/2人</td></tr>
-                  <tr><td>SPA</td><td>RMB 300–800/2人</td></tr>
-                  <tr><td>晚餐/甜品酒吧</td><td>RMB 250–500/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>08:00</td><td>早餐</td><td>轻松开始</td></tr>
-                  <tr><td>09:00–13:00</td><td>Tirta Empul 净身仪式</td><td>建议司机熟悉寺庙流程</td></tr>
-                  <tr><td>13:00–14:30</td><td>午餐</td><td>山景餐厅 / 乌布内餐厅</td></tr>
-                  <tr><td>15:30–17:30</td><td>深层SPA</td><td>Sang Spa,推荐 deep tissue</td></tr>
-                  <tr><td>19:30</td><td>晚餐</td><td>Room4Dessert / 安静正餐</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d4">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">04</span><span class="lbl">Sidemen</span></div>
-              <div><span class="day-stay">住宿 · Wapa di Ume Sidemen</span><h3 class="day-title">乌布 → Sidemen</h3></div>
-            </div>
-            <p class="day-highlight">全程陆路换区,下午留给山谷环境本身,不必塞行程。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D4 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>乌布→Sidemen 包车</td><td>IDR 500,000–800,000/车</td></tr>
-                  <tr><td>住宿</td><td>RMB 1,000–1,800/晚/间</td></tr>
-                  <tr><td>午餐/简餐</td><td>RMB 100–250/2人</td></tr>
-                  <tr><td>晚餐</td><td>RMB 250–450/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>08:00</td><td>早餐、退房准备</td><td>不用赶太早</td></tr>
-                  <tr><td>10:00</td><td>前往 Sidemen(约1.5–2h)</td><td>全程陆路,比较舒服</td></tr>
-                  <tr><td>中途可选</td><td>顺路停留 1 个点</td><td>Tirta Gangga / 咖啡庄园 / 瀑布,只选一个</td></tr>
-                  <tr><td>13:00–14:00</td><td>抵达办理入住</td><td>Wapa di Ume Sidemen</td></tr>
-                  <tr><td>下午</td><td>酒店休息、看山谷</td><td>这是重点,不必塞行程</td></tr>
-                  <tr><td>16:30–17:30</td><td>轻徒步/村落散步</td><td>看稻田和河谷光线</td></tr>
-                  <tr><td>19:00</td><td>晚餐</td><td>酒店内优先,不建议跑远</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d5">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">05</span><span class="lbl">Sidemen</span></div>
-              <div><span class="day-stay">住宿 · Wapa di Ume Sidemen</span><h3 class="day-title">梯田徒步 + 乡野慢生活</h3></div>
-            </div>
-            <p class="day-highlight">Sidemen 核心体验日:梯田徒步、花浴按摩、傍晚看阿贡火山云层。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D5 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>当地徒步向导</td><td>RMB 150–350/2人</td></tr>
-                  <tr><td>午餐</td><td>RMB 100–220/2人</td></tr>
-                  <tr><td>花浴/按摩</td><td>RMB 250–700/2人</td></tr>
-                  <tr><td>晚餐</td><td>RMB 200–400/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>07:30</td><td>早餐</td><td>尽量早一点看山谷晨景</td></tr>
-                  <tr><td>08:30–11:30</td><td>梯田徒步/村落 walk</td><td>酒店安排 / 本地向导</td></tr>
-                  <tr><td>12:00–13:30</td><td>午餐</td><td>酒店 / 本地 warung</td></tr>
-                  <tr><td>14:30–16:30</td><td>花浴 / 按摩 / 午休</td><td>酒店SPA,非常适合安排</td></tr>
-                  <tr><td>17:00–18:00</td><td>看阿贡火山云层</td><td>天气好会非常美</td></tr>
-                  <tr><td>19:00</td><td>晚餐</td><td>Sidemen 夜晚节奏很慢</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d6">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">06</span><span class="lbl">Uluwatu</span></div>
-              <div><span class="day-stay">住宿 · Anantara Uluwatu Bali Resort</span><h3 class="day-title">Sidemen → 乌鲁瓦图</h3></div>
-            </div>
-            <p class="day-highlight">从山谷到海崖的长途换区,山谷切换到海边的反差会很明显。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D6 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>Sidemen→乌鲁瓦图包车</td><td>IDR 700,000–1,000,000/车</td></tr>
-                  <tr><td>午餐</td><td>RMB 100–250/2人</td></tr>
-                  <tr><td>住宿</td><td>RMB 1,800–2,800/晚/间</td></tr>
-                  <tr><td>晚餐</td><td>RMB 300–600/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>上午</td><td>早餐、慢慢退房</td><td>这天以转场为主</td></tr>
-                  <tr><td>10:30</td><td>前往乌鲁瓦图(约2.5–3h)</td><td>不建议中途塞太多点</td></tr>
-                  <tr><td>中午/下午</td><td>途中简餐</td><td>视路况,简单即可</td></tr>
-                  <tr><td>下午</td><td>抵达 check-in</td><td>Anantara Uluwatu</td></tr>
-                  <tr><td>傍晚</td><td>酒店海景、泳池、休息</td><td>先恢复体力</td></tr>
-                  <tr><td>晚餐</td><td>酒店内 / Single Fin</td><td>不建议复杂安排</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d7">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">07</span><span class="lbl">Uluwatu</span></div>
-              <div><span class="day-stay">住宿 · Anantara Uluwatu Bali Resort</span><h3 class="day-title">海滩 + 高质量SPA + Kecak火舞</h3></div>
-            </div>
-            <p class="day-highlight">悬崖海景高潮日:海滩、SPA、Uluwatu寺、Kecak火舞、Cuca 正式晚餐。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D7 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>海滩打车往返</td><td>预留 RMB 80–150</td></tr>
-                  <tr><td>午餐</td><td>RMB 150–300/2人</td></tr>
-                  <tr><td>SPA</td><td>RMB 400–1,000/2人</td></tr>
-                  <tr><td>火舞门票</td><td>RMB 160–300/2人</td></tr>
-                  <tr><td>晚餐</td><td>RMB 400–800/2人</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>08:30</td><td>早餐</td><td>慢起即可</td></tr>
-                  <tr><td>10:30–13:00</td><td>海滩半日</td><td>Bingin / Thomas / Melasti 三选一</td></tr>
-                  <tr><td>13:30</td><td>午餐</td><td>Suka Espresso / Drifter Cafe</td></tr>
-                  <tr><td>15:00–17:00</td><td>高质量SPA</td><td>Spring Spa Uluwatu / 酒店SPA</td></tr>
-                  <tr><td>17:30–19:00</td><td>乌鲁瓦图寺 + Kecak火舞</td><td>提前到场,注意猴子抢物品</td></tr>
-                  <tr><td>20:00</td><td>最后一晚正式晚餐</td><td>Cuca,强烈建议提前预约</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-panel" data-day="d8">
-        <div class="spread">
-          <div class="leaf">
-            <div class="day-stamp-row">
-              <div class="day-stamp"><span class="num">08</span><span class="lbl">返程</span></div>
-              <div><span class="day-stay">退房返程</span><h3 class="day-title">乌鲁瓦图 → 机场返程</h3></div>
-            </div>
-            <p class="day-highlight">根据航班安排早餐与退房,建议至少提前3小时前往机场。</p>
-            <div class="block table-wrap">
-              <table>
-                <thead><tr><th colspan="2">D8 预算参考(双人)</th></tr></thead>
-                <tbody>
-                  <tr><td>送机</td><td>IDR 350,000–500,000/车</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="leaf">
-            <div class="leaf-label">时间安排</div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
-                <tbody>
-                  <tr><td>上午</td><td>早餐、收拾行李</td><td>根据航班安排</td></tr>
-                  <tr><td>中午前后</td><td>退房</td><td>注意证件、退税物品、贵重物品</td></tr>
-                  <tr><td>出发前</td><td>前往机场 DPS(约45–90分钟)</td><td>建议至少提前3小时出发</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">3 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- HOTELS -->
-    <div class="page" data-page="hotels">
-      <div class="page-head">
-        <span class="tag"><span class="num">三</span>Stay</span>
-        <h2>酒店清单</h2>
-        <p>左页为三段路线的首选酒店,右页为对应备选方案。</p>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">首选方案</div>
-          <div class="mini-card"><h4>乌布 · Bisma Eight Ubud</h4><p>设计感、位置、度假感都很平衡</p><div class="meta">5星 · RMB 1,400–2,200/晚/间</div></div>
-          <div class="mini-card"><h4>Sidemen · Wapa di Ume Sidemen</h4><p>山谷景观强、调性高级</p><div class="meta">5星 · RMB 1,000–1,800/晚/间</div></div>
-          <div class="mini-card"><h4>乌鲁瓦图 · Anantara Uluwatu Bali Resort</h4><p>收尾氛围强,海景完成度高</p><div class="meta">5星 · RMB 1,800–2,800/晚/间</div></div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">备选方案</div>
-          <div class="mini-card"><h4>乌布 · Adiwana Suweta</h4><p>更静、更稻田感,性价比高</p><div class="meta">4.5星 · RMB 1,000–1,800/晚/间</div></div>
-          <div class="mini-card"><h4>乌布 · Maya Ubud</h4><p>雨林感和空间感好,稳妥</p><div class="meta">4.5星 · RMB 1,200–2,000/晚/间</div></div>
-          <div class="mini-card"><h4>Sidemen · Samanvaya Luxury Resort & Spa</h4><p>成人向、安静、田野感强,很适合情侣</p><div class="meta">4.5星 · RMB 1,000–1,700/晚/间</div></div>
-          <div class="mini-card"><h4>Sidemen · Veluvana Bali</h4><p>网红级火山景,预算允许可选</p><div class="meta">4.5星 · RMB 1,500–2,500/晚/间</div></div>
-          <div class="mini-card"><h4>乌鲁瓦图 · Radisson Blu Uluwatu</h4><p>稳定、性价比高,控预算可选</p><div class="meta">4.5星 · RMB 1,200–1,900/晚/间</div></div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">4 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- FOOD -->
-    <div class="page" data-page="food">
-      <div class="page-head">
-        <span class="tag"><span class="num">四</span>Eat & Drink</span>
-        <h2>餐厅清单</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">乌布</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>餐厅</th><th>餐型</th><th>人均</th></tr></thead>
-              <tbody>
-                <tr><td>Hujan Locale</td><td>印尼融合</td><td>RMB 150–250</td></tr>
-                <tr><td>Nusantara by Locavore</td><td>印尼群岛料理</td><td>RMB 150–250</td></tr>
-                <tr><td>Merlin's</td><td>创意氛围餐</td><td>RMB 150–250</td></tr>
-                <tr><td>Donna Ubud</td><td>时髦餐酒</td><td>RMB 150–250</td></tr>
-                <tr><td>Room4Dessert</td><td>甜品/酒吧</td><td>RMB 100–200</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">Sidemen · 乌鲁瓦图</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>餐厅</th><th>餐型</th><th>人均</th></tr></thead>
-              <tbody>
-                <tr><td>酒店餐厅(Sidemen)</td><td>印尼/西式</td><td>RMB 100–220</td></tr>
-                <tr><td>本地 warung</td><td>家常印尼餐</td><td>RMB 30–80</td></tr>
-                <tr><td>高分山景餐厅</td><td>印尼/轻西式</td><td>RMB 80–150</td></tr>
-                <tr><td>Suka Espresso</td><td>brunch/lunch</td><td>RMB 60–120</td></tr>
-                <tr><td>Drifter Cafe</td><td>cafe/lunch</td><td>RMB 60–120</td></tr>
-                <tr><td>Cuca</td><td>正式收尾晚餐</td><td>RMB 200–400</td></tr>
-                <tr><td>Single Fin</td><td>景观餐酒</td><td>RMB 100–200</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">5 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- SPA -->
-    <div class="page" data-page="spa">
-      <div class="page-head">
-        <span class="tag"><span class="num">五</span>Rest & Ritual</span>
-        <h2>SPA与疗愈清单</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">乌布</div>
-          <div class="mini-card"><h4>Karsa Spa</h4><p>Balinese Massage / Foot Massage · 落地首晚很适合</p><div class="meta">RMB 120–300</div></div>
-          <div class="mini-card"><h4>Sang Spa</h4><p>Deep Tissue / Hot Stone · 适合D3深度放松</p><div class="meta">RMB 150–400</div></div>
-          <div class="mini-card"><h4>The Yoga Barn</h4><p>Yin / Meditation / Sound Healing · 乌布经典疗愈场地</p><div class="meta">RMB 80–180</div></div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">Sidemen · 乌鲁瓦图</div>
-          <div class="mini-card"><h4>酒店SPA(Sidemen)</h4><p>花浴 / 传统按摩 / 双人护理,景观和放松感都很强</p><div class="meta">RMB 120–350/人</div></div>
-          <div class="mini-card"><h4>Spring Spa Uluwatu</h4><p>Signature / Deep Tissue / After Sun · 收尾护理很适合</p><div class="meta">RMB 200–500</div></div>
-          <div class="mini-card"><h4>酒店SPA(乌鲁瓦图)</h4><p>双人护理,最省心,完成度高</p><div class="meta">视酒店定价</div></div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">6 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- TRANSPORT -->
-    <div class="page" data-page="transport">
-      <div class="page-head">
-        <span class="tag"><span class="num">六</span>Getting Around</span>
-        <h2>交通衔接逻辑</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">前半程</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>路段</th><th>方式</th><th>时长</th></tr></thead>
-              <tbody>
-                <tr><td>机场→乌布酒店</td><td>接机/包车</td><td>1.5–2小时</td></tr>
-                <tr><td>乌布市内/寺庙</td><td>包车半天/全天</td><td>视目的地</td></tr>
-                <tr><td>乌布→Sidemen</td><td>包车</td><td>1.5–2小时</td></tr>
-                <tr><td>Sidemen 当地</td><td>酒店安排/向导/步行</td><td>—</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">后半程</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>路段</th><th>方式</th><th>时长</th></tr></thead>
-              <tbody>
-                <tr><td>Sidemen→乌鲁瓦图</td><td>包车</td><td>2.5–3小时</td></tr>
-                <tr><td>乌鲁瓦图周边</td><td>打车/包车</td><td>10–40分钟</td></tr>
-                <tr><td>乌鲁瓦图→机场</td><td>酒店送机/Grab/包车</td><td>45–90分钟</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">7 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- BUDGET -->
-    <div class="page" data-page="budget">
-      <div class="page-head">
-        <span class="tag"><span class="num">七</span>Budget</span>
-        <h2>预算总表</h2>
-        <p>按双人同行测算。</p>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">模块预算</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>模块</th><th>双人</th><th>人均</th></tr></thead>
-              <tbody>
-                <tr><td>乌布住宿 3晚</td><td>4,200–6,600</td><td>2,100–3,300</td></tr>
-                <tr><td>Sidemen住宿 2晚</td><td>2,000–3,600</td><td>1,000–1,800</td></tr>
-                <tr><td>乌鲁瓦图住宿 2晚</td><td>3,600–5,600</td><td>1,800–2,800</td></tr>
-                <tr><td>陆地交通</td><td>1,500–2,800</td><td>750–1,400</td></tr>
-                <tr><td>餐饮</td><td>4,500–7,000</td><td>2,250–3,500</td></tr>
-                <tr><td>体验+SPA</td><td>4,000–7,000</td><td>2,000–3,500</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">合计与目标</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>合计(双人)</th><th>合计(人均)</th></tr></thead>
-              <tbody><tr><td>RMB 19,800–32,600</td><td>RMB 9,900–16,300</td></tr></tbody>
-            </table>
-          </div>
-          <div class="range-bar">
-            <div class="track">
-              <div class="fill"></div>
-              <div class="marker" style="left:0%">9,900</div>
-              <div class="marker" style="left:80%">15,000 目标</div>
-              <div class="marker" style="left:100%; transform:translateX(-100%);">16,300</div>
-            </div>
-            <div class="endlabel"><span>人均下限</span><span>人均上限</span></div>
-          </div>
-          <div class="budget-target">建议控制目标:<b>RMB 15,000/人</b>,可做一两项升级仍在可控范围内。</div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">8 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- PRIORITY -->
-    <div class="page" data-page="priority">
-      <div class="page-head">
-        <span class="tag"><span class="num">八</span>Book Ahead</span>
-        <h2>预订优先级</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">高优先级</div>
-          <div class="mini-card"><h4>3段酒店</h4><p>好房型和好价格优先锁定</p><div class="meta">出行前 3–6 周</div></div>
-          <div class="mini-card"><h4>D2 烹饪课</h4><p>热门时段容易满</p><div class="meta">出行前 1–3 周</div></div>
-          <div class="mini-card"><h4>D7 Cuca 晚餐</h4><p>晚间热门时段紧张</p><div class="meta">出行前 1–3 周</div></div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">中优先级</div>
-          <div class="mini-card"><h4>D3 包车净身仪式</h4><p>司机熟悉流程很重要</p><div class="meta">出行前确认</div></div>
-          <div class="mini-card"><h4>Sidemen 徒步/体验</h4><p>酒店可协助安排</p><div class="meta">入住前 3–7 天</div></div>
-          <div class="mini-card"><h4>三地 SPA</h4><p>傍晚黄金时段容易满</p><div class="meta">出行前 1–2 周</div></div>
-          <div class="mini-card"><h4>Kecak 火舞时间</h4><p>避免和晚餐冲突</p><div class="meta">提前确认场次</div></div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">9 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- NOTES -->
-    <div class="page" data-page="notes">
-      <div class="page-head">
-        <span class="tag"><span class="num">九</span>Good to Know</span>
-        <h2>执行注意事项</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="info-mini">
-            <div class="mini-card"><h4>证件</h4><p>护照有效期至少6个月,保存护照、签证、酒店确认单截图</p></div>
-            <div class="mini-card"><h4>健康</h4><p>准备防晒、驱蚊液、肠胃药、创可贴、晒后修复</p></div>
-            <div class="mini-card"><h4>穿着</h4><p>寺庙需穿着得体,可准备薄外套、长裙/长裤、沙龙布</p></div>
-            <div class="mini-card"><h4>现金</h4><p>备一些小额印尼盾,司机小费、warung、临时消费更方便</p></div>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="info-mini">
-            <div class="mini-card"><h4>网络</h4><p>建议 eSIM 或落地流量卡,便于联系司机和查路线</p></div>
-            <div class="mini-card"><h4>路况</h4><p>巴厘堵车较常见,乌鲁瓦图南部尤其注意预留时间</p></div>
-            <div class="mini-card"><h4>行程节奏</h4><p>Sidemen 的重点是"待着",不是拼命跑点</p></div>
-            <div class="mini-card"><h4>天气</h4><p>山谷和火山景容易受天气影响,接受"遇见即赚到"的心态更好</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">10 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- FINAL -->
-    <div class="page" data-page="final">
-      <div class="page-head">
-        <span class="tag"><span class="num">十</span>Final Version</span>
-        <h2>建议预订版本(直接执行版)</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">住宿与体验</div>
-          <div class="table-wrap">
-            <table>
-              <tbody>
-                <tr><td>乌布酒店</td><td>Bisma Eight Ubud,3晚</td></tr>
-                <tr><td>Sidemen酒店</td><td>Wapa di Ume Sidemen,2晚</td></tr>
-                <tr><td>乌鲁瓦图酒店</td><td>Anantara Uluwatu Bali Resort,2晚</td></tr>
-                <tr><td>烹饪课</td><td>Paon Bali Cooking Class</td></tr>
-                <tr><td>乌布疗愈</td><td>The Yoga Barn 一节 yin/meditation/sound healing</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">SPA · 餐饮 · 交通</div>
-          <div class="table-wrap">
-            <table>
-              <tbody>
-                <tr><td>乌布SPA</td><td>D1 Karsa Spa;D3 Sang Spa</td></tr>
-                <tr><td>Sidemen体验</td><td>酒店安排梯田徒步 + 酒店SPA花浴/按摩</td></tr>
-                <tr><td>乌鲁瓦图SPA</td><td>Spring Spa Uluwatu</td></tr>
-                <tr><td>乌鲁瓦图晚餐</td><td>Cuca</td></tr>
-                <tr><td>司机策略</td><td>全程分段包车,不建议临时找车</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">11 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- SELL -->
-    <div class="page" data-page="sell">
-      <div class="page-head">
-        <span class="tag"><span class="num">十一</span>Why Plan C</span>
-        <h2>方案C的核心卖点</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="sell-card"><div class="dim">不重复</div><p>乌布、Sidemen、乌鲁瓦图三段调性差异明显</p></div>
-          <div class="sell-card"><div class="dim">authentic</div><p>比苍古更本地,比Gili更深入巴厘内陆气质</p></div>
-          <div class="sell-card"><div class="dim">层次感</div><p>从文化 → 山谷田野 → 悬崖海景,递进非常自然</p></div>
-        </div>
-        <div class="leaf">
-          <div class="sell-card"><div class="dim">节奏</div><p>没有快船,不晕船,不被海况影响</p></div>
-          <div class="sell-card"><div class="dim">审美</div><p>稻田、山谷、火山云层、悬崖海景都兼顾</p></div>
-          <div class="sell-card"><div class="dim">预算效率</div><p>更多花在酒店体验和内容本身,不浪费在岛间折腾上</p></div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">12 / 13</span><button class="turn-btn next" data-next>下一页 →</button></div>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="page" data-page="summary">
-      <div class="page-head">
-        <span class="tag"><span class="num">十二</span>Share</span>
-        <h2>可复制给同行人的简版</h2>
-      </div>
-      <div class="spread">
-        <div class="leaf">
-          <div class="leaf-label">路线</div>
-          <ul class="plain">
-            <li><b>D1–D3 乌布</b>:住 Bisma Eight,做烹饪课、净身仪式、瑜伽、SPA</li>
-            <li><b>D4–D5 Sidemen</b>:住 Wapa di Ume Sidemen,看山谷梯田、村落徒步、花浴和慢生活</li>
-            <li><b>D6–D7 乌鲁瓦图</b>:住 Anantara,看海滩、做高质量SPA、看Kecak火舞、Cuca收尾晚餐</li>
-            <li><b>D8</b>:返程</li>
-          </ul>
-        </div>
-        <div class="leaf">
-          <div class="leaf-label">预算 · 关键词</div>
-          <ul class="plain" style="margin-bottom:16px;">
-            <li>约 RMB 15,000/人</li>
-            <li>不含国际机票</li>
-          </ul>
-          <div class="keyword-chip-row">
-            <span class="keyword-chip">authentic</span>
-            <span class="keyword-chip">不重复</span>
-            <span class="keyword-chip">山谷田野</span>
-            <span class="keyword-chip">疗愈</span>
-            <span class="keyword-chip">悬崖海景</span>
-            <span class="keyword-chip">高级松弛感</span>
-          </div>
-        </div>
-      </div>
-      <div class="page-turn"><button class="turn-btn prev" data-prev>← 上一页</button><span class="page-count">13 / 13</span><span class="turn-btn ghost">占位</span></div>
-    </div>
-
-  </main>
+  </div>
 </div>
 
-<script>
-(function(){
-  var pageOrder = ["cover","overview","daily","hotels","food","spa","transport","budget","priority","notes","final","sell","summary"];
-  var pages = document.querySelectorAll(".page");
-  var navItems = document.querySelectorAll(".nav-item");
+<nav class="quicknav">
+  <div class="quicknav-inner">
+    <a href="#overview"><span class="n">一</span>总览</a>
+    <a href="#map"><span class="n">·</span>地图纵览</a>
+    <a href="#daily"><span class="n">二</span>每日执行</a>
+    <a href="#hotels"><span class="n">三</span>酒店</a>
+    <a href="#food"><span class="n">四</span>餐厅</a>
+    <a href="#spa"><span class="n">五</span>SPA</a>
+    <a href="#transport"><span class="n">六</span>交通</a>
+    <a href="#budget"><span class="n">七</span>预算</a>
+    <a href="#priority"><span class="n">八</span>优先级</a>
+    <a href="#notes"><span class="n">九</span>注意事项</a>
+    <a href="#final"><span class="n">十</span>执行版</a>
+    <a href="#sell"><span class="n">十一</span>卖点</a>
+    <a href="#summary"><span class="n">十二</span>简版</a>
+  </div>
+</nav>
 
-  function setPage(name){
-    pages.forEach(function(p){ p.classList.toggle("active", p.dataset.page === name); });
-    navItems.forEach(function(li){
-      var btn = li.querySelector(".nav-btn");
-      li.classList.toggle("active", btn.dataset.page === name);
-    });
-    document.getElementById("main").scrollTop = 0;
-  }
+<section id="overview">
+  <div class="section-head">
+    <span class="tag"><span class="num">一</span>Overview</span>
+    <h2>行程总览</h2>
+    <p>适合不想重复、讨厌赶场、想要层次感和高级松弛感的旅行者。</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>天数</th><th>城市/区域</th><th>住宿</th><th>核心主题</th><th>重点体验</th></tr></thead>
+      <tbody>
+        <tr><td>D1</td><td>抵达巴厘岛 → 乌布</td><td>Bisma Eight Ubud</td><td>落地缓冲</td><td>接机、酒店休息、落地按摩、晚餐</td></tr>
+        <tr><td>D2</td><td>乌布</td><td>Bisma Eight Ubud</td><td>文化饮食日</td><td>巴厘烹饪课、稻田/步道散步、瑜伽/冥想</td></tr>
+        <tr><td>D3</td><td>乌布</td><td>Bisma Eight Ubud</td><td>仪式疗愈日</td><td>Tirta Empul净身、深层SPA、安静晚餐</td></tr>
+        <tr><td>D4</td><td>乌布 → Sidemen</td><td>Wapa di Ume Sidemen</td><td>进入山谷田野</td><td>沿途风景、入住山谷酒店、下午发呆/轻徒步</td></tr>
+        <tr><td>D5</td><td>Sidemen</td><td>Wapa di Ume Sidemen</td><td>authentic乡野日</td><td>梯田徒步、村落体验、花浴/按摩、火山云景</td></tr>
+        <tr><td>D6</td><td>Sidemen → 乌鲁瓦图</td><td>Anantara Uluwatu Bali Resort</td><td>从山到海</td><td>长途换区、海景酒店、轻松收尾</td></tr>
+        <tr><td>D7</td><td>乌鲁瓦图</td><td>Anantara Uluwatu Bali Resort</td><td>悬崖海景高潮日</td><td>海滩、SPA、Uluwatu寺、Kecak火舞、正式晚餐</td></tr>
+        <tr><td>D8</td><td>乌鲁瓦图 → 机场</td><td>—</td><td>返程</td><td>早餐、退房、送机</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-  navItems.forEach(function(li){
-    var btn = li.querySelector(".nav-btn");
-    btn.addEventListener("click", function(){ setPage(btn.dataset.page); });
-  });
+<section id="map">
+  <div class="section-head">
+    <span class="tag"><span class="num">·</span>Route Overview</span>
+    <h2>活动地图纵览</h2>
+    <p>按路线顺序的示意图,而非精确地理地图:三段区域 + 每天核心活动一览。</p>
+  </div>
+  <div class="map-wrap">
+    <div class="route-row">
+      <div class="route-stop">
+        <div class="stop-node"><span class="stop-dot"></span><span class="stop-name">乌布 Ubud</span></div>
+        <div class="stop-days">
+          <span class="stop-day-badge">D1</span><span class="stop-day-badge">D2</span><span class="stop-day-badge">D3</span>
+        </div>
+        <ul class="stop-activities">
+          <li><b>D1</b> 落地按摩 · 晚餐 Hujan Locale</li>
+          <li><b>D2</b> 烹饪课 · Ridge Walk · 瑜伽冥想</li>
+          <li><b>D3</b> Tirta Empul净身 · 深层SPA</li>
+        </ul>
+      </div>
+      <div class="route-link"><span class="arrow">→</span><span class="time">1.5–2h<br>包车</span></div>
+      <div class="route-stop">
+        <div class="stop-node"><span class="stop-dot"></span><span class="stop-name">Sidemen</span></div>
+        <div class="stop-days">
+          <span class="stop-day-badge">D4</span><span class="stop-day-badge">D5</span>
+        </div>
+        <ul class="stop-activities">
+          <li><b>D4</b> 沿途停留 · 入住山谷酒店 · 轻徒步</li>
+          <li><b>D5</b> 梯田徒步 · 花浴按摩 · 阿贡火山云景</li>
+        </ul>
+      </div>
+      <div class="route-link"><span class="arrow">→</span><span class="time">2.5–3h<br>包车</span></div>
+      <div class="route-stop">
+        <div class="stop-node"><span class="stop-dot"></span><span class="stop-name">乌鲁瓦图 Uluwatu</span></div>
+        <div class="stop-days">
+          <span class="stop-day-badge">D6</span><span class="stop-day-badge">D7</span><span class="stop-day-badge">D8</span>
+        </div>
+        <ul class="stop-activities">
+          <li><b>D6</b> 换区抵达 · 酒店海景休整</li>
+          <li><b>D7</b> 海滩 · 高质量SPA · 火舞 · Cuca晚餐</li>
+          <li><b>D8</b> 退房 · 送机返程</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  document.querySelectorAll("[data-next]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var current = document.querySelector(".page.active").dataset.page;
-      var idx = pageOrder.indexOf(current);
-      if (idx < pageOrder.length - 1) setPage(pageOrder[idx + 1]);
-    });
-  });
-  document.querySelectorAll("[data-prev]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var current = document.querySelector(".page.active").dataset.page;
-      var idx = pageOrder.indexOf(current);
-      if (idx > 0) setPage(pageOrder[idx - 1]);
-    });
-  });
+<section id="daily">
+  <div class="section-head">
+    <span class="tag"><span class="num">二</span>Day by Day</span>
+    <h2>每日详细执行</h2>
+    <p>每天以一个区域/主题为主轴,两两并排,时间、内容与备注一一对应。</p>
+  </div>
+  <div class="day-grid">
 
-  var dayTabs = document.querySelectorAll(".day-tab");
-  var dayPanels = document.querySelectorAll(".day-panel");
-  dayTabs.forEach(function(tab){
-    tab.addEventListener("click", function(){
-      dayTabs.forEach(function(t){ t.classList.toggle("active", t === tab); });
-      dayPanels.forEach(function(p){ p.classList.toggle("active", p.dataset.day === tab.dataset.day); });
-    });
-  });
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">01</span><span class="lbl">Ubud</span></div>
+        <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">D1 抵达巴厘岛 → 乌布</h3></div>
+      </div>
+      <p class="day-highlight">落地缓冲日,以顺利落地为主,不建议安排景点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>抵达后</td><td>DPS 入境</td><td>提前准备电子落地签、海关申报</td></tr>
+            <tr><td>抵达后</td><td>前往乌布酒店(1.5–2h)</td><td>酒店接机或包车司机</td></tr>
+            <tr><td>下午</td><td>check-in,泳池放空</td><td>不建议安排景点</td></tr>
+            <tr><td>17:00–18:30</td><td>落地按摩</td><td>Karsa Spa / 酒店SPA</td></tr>
+            <tr><td>19:30</td><td>晚餐</td><td>Hujan Locale / Nusantara</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D1预算(双人):</b> 接机 IDR 350–500k · 住宿 RMB 1,400–2,200/晚 · SPA RMB 240–600 · 晚餐 RMB 300–500</div>
+    </div>
 
-  setPage("cover");
-})();
-</script>
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">02</span><span class="lbl">Ubud</span></div>
+        <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">D2 文化与饮食 authentic day</h3></div>
+      </div>
+      <p class="day-highlight">烹饪课 + 步道 + 瑜伽冥想,乌布经典的一天。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>07:30–08:00</td><td>早餐</td><td>慢起即可</td></tr>
+            <tr><td>08:30–13:30</td><td>巴厘烹饪课(含市场)</td><td>Paon Bali Cooking Class</td></tr>
+            <tr><td>14:30–16:00</td><td>回酒店午休/泳池</td><td>不加额外景点</td></tr>
+            <tr><td>16:30–17:30</td><td>步道慢走</td><td>Campuhan Ridge Walk</td></tr>
+            <tr><td>18:00–19:00</td><td>瑜伽/冥想/音疗</td><td>The Yoga Barn</td></tr>
+            <tr><td>20:00</td><td>晚餐</td><td>Merlin's / Donna Ubud</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D2预算(双人):</b> 烹饪课 RMB 400–700 · 瑜伽/冥想 RMB 160–360 · 晚餐 RMB 300–500</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">03</span><span class="lbl">Ubud</span></div>
+        <div><span class="day-stay">住宿 · Bisma Eight Ubud</span><h3 class="day-title">D3 净身仪式 + 深层疗愈</h3></div>
+      </div>
+      <p class="day-highlight">Tirta Empul净身仪式 + 深层SPA,这晚适合收心。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>08:00</td><td>早餐</td><td>轻松开始</td></tr>
+            <tr><td>09:00–13:00</td><td>Tirta Empul 净身仪式</td><td>建议司机熟悉寺庙流程</td></tr>
+            <tr><td>13:00–14:30</td><td>午餐</td><td>山景餐厅 / 乌布内餐厅</td></tr>
+            <tr><td>15:30–17:30</td><td>深层SPA</td><td>Sang Spa,推荐deep tissue</td></tr>
+            <tr><td>19:30</td><td>晚餐</td><td>Room4Dessert / 安静正餐</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D3预算(双人):</b> 包车 IDR 600–800k · 寺庙相关 RMB 80–200 · 午餐 RMB 150–300 · SPA RMB 300–800 · 晚餐 RMB 250–500</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">04</span><span class="lbl">Sidemen</span></div>
+        <div><span class="day-stay">住宿 · Wapa di Ume Sidemen</span><h3 class="day-title">D4 乌布 → Sidemen</h3></div>
+      </div>
+      <p class="day-highlight">全程陆路换区,下午留给山谷环境本身,不必塞行程。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>08:00</td><td>早餐、退房准备</td><td>不用赶太早</td></tr>
+            <tr><td>10:00</td><td>前往 Sidemen(1.5–2h)</td><td>全程陆路,比较舒服</td></tr>
+            <tr><td>中途可选</td><td>顺路停留 1 个点</td><td>Tirta Gangga / 咖啡庄园 / 瀑布,只选一个</td></tr>
+            <tr><td>13:00–14:00</td><td>抵达办理入住</td><td>Wapa di Ume Sidemen</td></tr>
+            <tr><td>下午</td><td>酒店休息、看山谷</td><td>这是重点,不必塞行程</td></tr>
+            <tr><td>16:30–17:30</td><td>轻徒步/村落散步</td><td>看稻田和河谷光线</td></tr>
+            <tr><td>19:00</td><td>晚餐</td><td>酒店内优先,不建议跑远</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D4预算(双人):</b> 包车 IDR 500–800k · 住宿 RMB 1,000–1,800/晚 · 午餐 RMB 100–250 · 晚餐 RMB 250–450</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">05</span><span class="lbl">Sidemen</span></div>
+        <div><span class="day-stay">住宿 · Wapa di Ume Sidemen</span><h3 class="day-title">D5 梯田徒步 + 乡野慢生活</h3></div>
+      </div>
+      <p class="day-highlight">Sidemen 核心体验日:梯田徒步、花浴按摩、傍晚看火山云层。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>07:30</td><td>早餐</td><td>尽量早一点看山谷晨景</td></tr>
+            <tr><td>08:30–11:30</td><td>梯田徒步/村落walk</td><td>酒店安排 / 本地向导</td></tr>
+            <tr><td>12:00–13:30</td><td>午餐</td><td>酒店 / 本地 warung</td></tr>
+            <tr><td>14:30–16:30</td><td>花浴 / 按摩 / 午休</td><td>酒店SPA,非常适合</td></tr>
+            <tr><td>17:00–18:00</td><td>看阿贡火山云层</td><td>天气好会非常美</td></tr>
+            <tr><td>19:00</td><td>晚餐</td><td>Sidemen 夜晚节奏很慢</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D5预算(双人):</b> 向导 RMB 150–350 · 午餐 RMB 100–220 · 花浴/按摩 RMB 250–700 · 晚餐 RMB 200–400</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">06</span><span class="lbl">Uluwatu</span></div>
+        <div><span class="day-stay">住宿 · Anantara Uluwatu Bali Resort</span><h3 class="day-title">D6 Sidemen → 乌鲁瓦图</h3></div>
+      </div>
+      <p class="day-highlight">从山谷到海崖的长途换区,反差会很明显。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>上午</td><td>早餐、慢慢退房</td><td>这天以转场为主</td></tr>
+            <tr><td>10:30</td><td>前往乌鲁瓦图(2.5–3h)</td><td>不建议中途塞太多点</td></tr>
+            <tr><td>中午/下午</td><td>途中简餐</td><td>视路况,简单即可</td></tr>
+            <tr><td>下午</td><td>抵达 check-in</td><td>Anantara Uluwatu</td></tr>
+            <tr><td>傍晚</td><td>酒店海景、泳池、休息</td><td>先恢复体力</td></tr>
+            <tr><td>晚餐</td><td>酒店内 / Single Fin</td><td>不建议复杂安排</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D6预算(双人):</b> 包车 IDR 700k–1,000k · 午餐 RMB 100–250 · 住宿 RMB 1,800–2,800/晚 · 晚餐 RMB 300–600</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">07</span><span class="lbl">Uluwatu</span></div>
+        <div><span class="day-stay">住宿 · Anantara Uluwatu Bali Resort</span><h3 class="day-title">D7 海滩 + SPA + Kecak火舞</h3></div>
+      </div>
+      <p class="day-highlight">悬崖海景高潮日:海滩、SPA、寺庙、火舞、Cuca晚餐。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>08:30</td><td>早餐</td><td>慢起即可</td></tr>
+            <tr><td>10:30–13:00</td><td>海滩半日</td><td>Bingin / Thomas / Melasti 三选一</td></tr>
+            <tr><td>13:30</td><td>午餐</td><td>Suka Espresso / Drifter Cafe</td></tr>
+            <tr><td>15:00–17:00</td><td>高质量SPA</td><td>Spring Spa Uluwatu / 酒店SPA</td></tr>
+            <tr><td>17:30–19:00</td><td>乌鲁瓦图寺 + Kecak火舞</td><td>提前到场,注意猴子抢物品</td></tr>
+            <tr><td>20:00</td><td>正式晚餐</td><td>Cuca,强烈建议提前预约</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D7预算(双人):</b> 打车 RMB 80–150 · 午餐 RMB 150–300 · SPA RMB 400–1,000 · 火舞 RMB 160–300 · 晚餐 RMB 400–800</div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-stamp-row">
+        <div class="day-stamp"><span class="num">08</span><span class="lbl">返程</span></div>
+        <div><span class="day-stay">退房返程</span><h3 class="day-title">D8 乌鲁瓦图 → 机场返程</h3></div>
+      </div>
+      <p class="day-highlight">根据航班安排早餐与退房,建议提前3小时前往机场。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>时间</th><th>内容</th><th>推荐/备注</th></tr></thead>
+          <tbody>
+            <tr><td>上午</td><td>早餐、收拾行李</td><td>根据航班安排</td></tr>
+            <tr><td>中午前后</td><td>退房</td><td>注意证件、退税物品、贵重物品</td></tr>
+            <tr><td>出发前</td><td>前往机场 DPS(45–90min)</td><td>建议至少提前3小时出发</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="day-budget-line"><b>D8预算(双人):</b> 送机 IDR 350–500k</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="hotels">
+  <div class="section-head">
+    <span class="tag"><span class="num">三</span>Stay</span>
+    <h2>酒店清单</h2>
+    <p>左列为三段路线的首选酒店,右列为对应备选方案。</p>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">首选方案</div>
+      <div class="mini-card"><h4>乌布 · Bisma Eight Ubud</h4><p>设计感、位置、度假感都很平衡</p><div class="meta">5星 · RMB 1,400–2,200/晚/间</div></div>
+      <div class="mini-card"><h4>Sidemen · Wapa di Ume Sidemen</h4><p>山谷景观强、调性高级</p><div class="meta">5星 · RMB 1,000–1,800/晚/间</div></div>
+      <div class="mini-card"><h4>乌鲁瓦图 · Anantara Uluwatu Bali Resort</h4><p>收尾氛围强,海景完成度高</p><div class="meta">5星 · RMB 1,800–2,800/晚/间</div></div>
+    </div>
+    <div>
+      <div class="col-label">备选方案</div>
+      <div class="mini-card"><h4>乌布 · Adiwana Suweta</h4><p>更静、更稻田感,性价比高</p><div class="meta">4.5星 · RMB 1,000–1,800/晚/间</div></div>
+      <div class="mini-card"><h4>乌布 · Maya Ubud</h4><p>雨林感和空间感好,稳妥</p><div class="meta">4.5星 · RMB 1,200–2,000/晚/间</div></div>
+      <div class="mini-card"><h4>Sidemen · Samanvaya Luxury Resort & Spa</h4><p>成人向、安静、田野感强,很适合情侣</p><div class="meta">4.5星 · RMB 1,000–1,700/晚/间</div></div>
+      <div class="mini-card"><h4>Sidemen · Veluvana Bali</h4><p>网红级火山景,预算允许可选</p><div class="meta">4.5星 · RMB 1,500–2,500/晚/间</div></div>
+      <div class="mini-card"><h4>乌鲁瓦图 · Radisson Blu Uluwatu</h4><p>稳定、性价比高,控预算可选</p><div class="meta">4.5星 · RMB 1,200–1,900/晚/间</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="food">
+  <div class="section-head">
+    <span class="tag"><span class="num">四</span>Eat & Drink</span>
+    <h2>餐厅清单</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">乌布</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>餐厅</th><th>餐型</th><th>人均</th></tr></thead>
+          <tbody>
+            <tr><td>Hujan Locale</td><td>印尼融合</td><td>RMB 150–250</td></tr>
+            <tr><td>Nusantara by Locavore</td><td>印尼群岛料理</td><td>RMB 150–250</td></tr>
+            <tr><td>Merlin's</td><td>创意氛围餐</td><td>RMB 150–250</td></tr>
+            <tr><td>Donna Ubud</td><td>时髦餐酒</td><td>RMB 150–250</td></tr>
+            <tr><td>Room4Dessert</td><td>甜品/酒吧</td><td>RMB 100–200</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">Sidemen · 乌鲁瓦图</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>餐厅</th><th>餐型</th><th>人均</th></tr></thead>
+          <tbody>
+            <tr><td>酒店餐厅(Sidemen)</td><td>印尼/西式</td><td>RMB 100–220</td></tr>
+            <tr><td>本地 warung</td><td>家常印尼餐</td><td>RMB 30–80</td></tr>
+            <tr><td>高分山景餐厅</td><td>印尼/轻西式</td><td>RMB 80–150</td></tr>
+            <tr><td>Suka Espresso</td><td>brunch/lunch</td><td>RMB 60–120</td></tr>
+            <tr><td>Drifter Cafe</td><td>cafe/lunch</td><td>RMB 60–120</td></tr>
+            <tr><td>Cuca</td><td>正式收尾晚餐</td><td>RMB 200–400</td></tr>
+            <tr><td>Single Fin</td><td>景观餐酒</td><td>RMB 100–200</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spa">
+  <div class="section-head">
+    <span class="tag"><span class="num">五</span>Rest & Ritual</span>
+    <h2>SPA与疗愈清单</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">乌布</div>
+      <div class="mini-card"><h4>Karsa Spa</h4><p>Balinese Massage / Foot Massage · 落地首晚很适合</p><div class="meta">RMB 120–300</div></div>
+      <div class="mini-card"><h4>Sang Spa</h4><p>Deep Tissue / Hot Stone · 适合D3深度放松</p><div class="meta">RMB 150–400</div></div>
+      <div class="mini-card"><h4>The Yoga Barn</h4><p>Yin / Meditation / Sound Healing · 乌布经典疗愈场地</p><div class="meta">RMB 80–180</div></div>
+    </div>
+    <div>
+      <div class="col-label">Sidemen · 乌鲁瓦图</div>
+      <div class="mini-card"><h4>酒店SPA(Sidemen)</h4><p>花浴 / 传统按摩 / 双人护理,景观和放松感都很强</p><div class="meta">RMB 120–350/人</div></div>
+      <div class="mini-card"><h4>Spring Spa Uluwatu</h4><p>Signature / Deep Tissue / After Sun · 收尾护理很适合</p><div class="meta">RMB 200–500</div></div>
+      <div class="mini-card"><h4>酒店SPA(乌鲁瓦图)</h4><p>双人护理,最省心,完成度高</p><div class="meta">视酒店定价</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="transport">
+  <div class="section-head">
+    <span class="tag"><span class="num">六</span>Getting Around</span>
+    <h2>交通衔接逻辑</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">前半程</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>路段</th><th>方式</th><th>时长</th></tr></thead>
+          <tbody>
+            <tr><td>机场→乌布酒店</td><td>接机/包车</td><td>1.5–2小时</td></tr>
+            <tr><td>乌布市内/寺庙</td><td>包车半天/全天</td><td>视目的地</td></tr>
+            <tr><td>乌布→Sidemen</td><td>包车</td><td>1.5–2小时</td></tr>
+            <tr><td>Sidemen 当地</td><td>酒店安排/向导/步行</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">后半程</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>路段</th><th>方式</th><th>时长</th></tr></thead>
+          <tbody>
+            <tr><td>Sidemen→乌鲁瓦图</td><td>包车</td><td>2.5–3小时</td></tr>
+            <tr><td>乌鲁瓦图周边</td><td>打车/包车</td><td>10–40分钟</td></tr>
+            <tr><td>乌鲁瓦图→机场</td><td>酒店送机/Grab/包车</td><td>45–90分钟</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="budget">
+  <div class="section-head">
+    <span class="tag"><span class="num">七</span>Budget</span>
+    <h2>预算总表</h2>
+    <p>按双人同行测算。</p>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">模块预算</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>模块</th><th>双人</th><th>人均</th></tr></thead>
+          <tbody>
+            <tr><td>乌布住宿 3晚</td><td>4,200–6,600</td><td>2,100–3,300</td></tr>
+            <tr><td>Sidemen住宿 2晚</td><td>2,000–3,600</td><td>1,000–1,800</td></tr>
+            <tr><td>乌鲁瓦图住宿 2晚</td><td>3,600–5,600</td><td>1,800–2,800</td></tr>
+            <tr><td>陆地交通</td><td>1,500–2,800</td><td>750–1,400</td></tr>
+            <tr><td>餐饮</td><td>4,500–7,000</td><td>2,250–3,500</td></tr>
+            <tr><td>体验+SPA</td><td>4,000–7,000</td><td>2,000–3,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">合计与目标</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>合计(双人)</th><th>合计(人均)</th></tr></thead>
+          <tbody><tr><td>RMB 19,800–32,600</td><td>RMB 9,900–16,300</td></tr></tbody>
+        </table>
+      </div>
+      <div class="range-bar">
+        <div class="track">
+          <div class="fill"></div>
+          <div class="marker" style="left:0%">9,900</div>
+          <div class="marker" style="left:80%">15,000 目标</div>
+          <div class="marker" style="left:100%; transform:translateX(-100%);">16,300</div>
+        </div>
+        <div class="endlabel"><span>人均下限</span><span>人均上限</span></div>
+      </div>
+      <div class="budget-target">建议控制目标:<b>RMB 15,000/人</b>,可做一两项升级仍在可控范围内。</div>
+    </div>
+  </div>
+</section>
+
+<section id="priority">
+  <div class="section-head">
+    <span class="tag"><span class="num">八</span>Book Ahead</span>
+    <h2>预订优先级</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">高优先级</div>
+      <div class="mini-card"><h4>3段酒店</h4><p>好房型和好价格优先锁定</p><div class="meta">出行前 3–6 周</div></div>
+      <div class="mini-card"><h4>D2 烹饪课</h4><p>热门时段容易满</p><div class="meta">出行前 1–3 周</div></div>
+      <div class="mini-card"><h4>D7 Cuca 晚餐</h4><p>晚间热门时段紧张</p><div class="meta">出行前 1–3 周</div></div>
+    </div>
+    <div>
+      <div class="col-label">中优先级</div>
+      <div class="mini-card"><h4>D3 包车净身仪式</h4><p>司机熟悉流程很重要</p><div class="meta">出行前确认</div></div>
+      <div class="mini-card"><h4>Sidemen 徒步/体验</h4><p>酒店可协助安排</p><div class="meta">入住前 3–7 天</div></div>
+      <div class="mini-card"><h4>三地 SPA</h4><p>傍晚黄金时段容易满</p><div class="meta">出行前 1–2 周</div></div>
+      <div class="mini-card"><h4>Kecak 火舞时间</h4><p>避免和晚餐冲突</p><div class="meta">提前确认场次</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="notes">
+  <div class="section-head">
+    <span class="tag"><span class="num">九</span>Good to Know</span>
+    <h2>执行注意事项</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>证件</h3><p>护照有效期至少6个月,保存护照、签证、酒店确认单截图</p></div>
+    <div class="info-card"><h3>健康</h3><p>准备防晒、驱蚊液、肠胃药、创可贴、晒后修复</p></div>
+    <div class="info-card"><h3>穿着</h3><p>寺庙需穿着得体,可准备薄外套、长裙/长裤、沙龙布</p></div>
+    <div class="info-card"><h3>现金</h3><p>备一些小额印尼盾,司机小费、warung、临时消费更方便</p></div>
+    <div class="info-card"><h3>网络</h3><p>建议 eSIM 或落地流量卡,便于联系司机和查路线</p></div>
+    <div class="info-card"><h3>路况</h3><p>巴厘堵车较常见,乌鲁瓦图南部尤其注意预留时间</p></div>
+    <div class="info-card"><h3>行程节奏</h3><p>Sidemen 的重点是"待着",不是拼命跑点</p></div>
+    <div class="info-card"><h3>天气</h3><p>山谷和火山景容易受天气影响,接受"遇见即赚到"的心态更好</p></div>
+    <div class="info-card new"><h3>小费习惯</h3><p>包车司机每天约 IDR 20,000–50,000,SPA技师每次约 IDR 20,000–50,000,酒店行李员每件约 IDR 10,000,建议备好整数小额现金</p></div>
+  </div>
+</section>
+
+<section id="final">
+  <div class="section-head">
+    <span class="tag"><span class="num">十</span>Final Version</span>
+    <h2>建议预订版本(直接执行版)</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">住宿与体验</div>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><td>乌布酒店</td><td>Bisma Eight Ubud,3晚</td></tr>
+            <tr><td>Sidemen酒店</td><td>Wapa di Ume Sidemen,2晚</td></tr>
+            <tr><td>乌鲁瓦图酒店</td><td>Anantara Uluwatu Bali Resort,2晚</td></tr>
+            <tr><td>烹饪课</td><td>Paon Bali Cooking Class</td></tr>
+            <tr><td>乌布疗愈</td><td>The Yoga Barn 一节 yin/meditation/sound healing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="col-label">SPA · 餐饮 · 交通</div>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            <tr><td>乌布SPA</td><td>D1 Karsa Spa;D3 Sang Spa</td></tr>
+            <tr><td>Sidemen体验</td><td>酒店安排梯田徒步 + 酒店SPA花浴/按摩</td></tr>
+            <tr><td>乌鲁瓦图SPA</td><td>Spring Spa Uluwatu</td></tr>
+            <tr><td>乌鲁瓦图晚餐</td><td>Cuca</td></tr>
+            <tr><td>司机策略</td><td>全程分段包车,不建议临时找车</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sell">
+  <div class="section-head">
+    <span class="tag"><span class="num">十一</span>Why Plan C</span>
+    <h2>方案C的核心卖点</h2>
+  </div>
+  <div class="sell-grid">
+    <div class="sell-card"><div class="dim">不重复</div><p>乌布、Sidemen、乌鲁瓦图三段调性差异明显</p></div>
+    <div class="sell-card"><div class="dim">authentic</div><p>比苍古更本地,比Gili更深入巴厘内陆气质</p></div>
+    <div class="sell-card"><div class="dim">层次感</div><p>从文化 → 山谷田野 → 悬崖海景,递进非常自然</p></div>
+    <div class="sell-card"><div class="dim">节奏</div><p>没有快船,不晕船,不被海况影响</p></div>
+    <div class="sell-card"><div class="dim">审美</div><p>稻田、山谷、火山云层、悬崖海景都兼顾</p></div>
+    <div class="sell-card"><div class="dim">预算效率</div><p>更多花在酒店体验和内容本身,不浪费在岛间折腾上</p></div>
+  </div>
+</section>
+
+<section id="summary">
+  <div class="section-head">
+    <span class="tag"><span class="num">十二</span>Share</span>
+    <h2>可复制给同行人的简版</h2>
+  </div>
+  <div class="split">
+    <div>
+      <div class="col-label">路线</div>
+      <ul class="plain">
+        <li><b>D1–D3 乌布</b>:住 Bisma Eight,做烹饪课、净身仪式、瑜伽、SPA</li>
+        <li><b>D4–D5 Sidemen</b>:住 Wapa di Ume Sidemen,看山谷梯田、村落徒步、花浴和慢生活</li>
+        <li><b>D6–D7 乌鲁瓦图</b>:住 Anantara,看海滩、做高质量SPA、看Kecak火舞、Cuca收尾晚餐</li>
+        <li><b>D8</b>:返程</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-label">预算 · 关键词</div>
+      <ul class="plain" style="margin-bottom:14px;">
+        <li>约 RMB 15,000/人</li>
+        <li>不含国际机票</li>
+      </ul>
+      <div class="keyword-chip-row">
+        <span class="keyword-chip">authentic</span>
+        <span class="keyword-chip">不重复</span>
+        <span class="keyword-chip">山谷田野</span>
+        <span class="keyword-chip">疗愈</span>
+        <span class="keyword-chip">悬崖海景</span>
+        <span class="keyword-chip">高级松弛感</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="divider"></div>
+  Bali · 方案C · 8天7晚 &nbsp;|&nbsp; 不重复、不赶场,层次递进的松弛感度假
+</footer>
 
 </body>
 </html>
